@@ -6,7 +6,8 @@ export const MainLayout = () => {
     <Box
       sx={{
         backgroundColor: 'grey.200',
-        maxWidth: '600px',
+        maxWidth: '500px',
+        minHeight: '100vh',
         mx: 'auto',
         p: 2
       }}

@@ -1,5 +1,5 @@
 export const ServerError = () => {
-  return <>Server Error</>;
+  return <div>Server Error</div>;
 };
 
 export default ServerError;
