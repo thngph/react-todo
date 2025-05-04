@@ -26,10 +26,8 @@ export const SearchBar = () => {
       defaultValue={searchParams.get('keyword') || ''}
       fullWidth
       sx={{
-        borderRadius: 2,
+        borderRadius: 8,
         marginBottom: 2,
-        boxShadow: '0px 4px 18px -4px rgba(16, 24, 40, 0.12)',
-        bgcolor: 'grey.300',
         input: { cursor: 'pointer' },
         '& ::placeholder': { fontSize: 'large' }
       }}
@@ -38,8 +36,8 @@ export const SearchBar = () => {
           endAdornment: <Search sx={{ color: 'grey.500', cursor: 'pointer' }} />,
           sx: (theme) => ({
             cursor: 'pointer',
-            borderRadius: 2,
-            padding: theme.spacing(2, 1)
+            borderRadius: 8,
+            padding: theme.spacing(0, 2)
           })
         }
       }}
