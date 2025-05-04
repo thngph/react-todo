@@ -16,7 +16,7 @@ export const NewToDo = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+    <Box mb={2}>
       <Tooltip title="Create new To do">
         <Add
           sx={{

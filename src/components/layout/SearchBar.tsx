@@ -36,11 +36,11 @@ export const SearchBar = () => {
       slotProps={{
         input: {
           endAdornment: <Search sx={{ color: 'grey.500', cursor: 'pointer' }} />,
-          sx: {
+          sx: (theme) => ({
             cursor: 'pointer',
             borderRadius: 2,
-            padding: '8px 16px'
-          }
+            padding: theme.spacing(2, 1)
+          })
         }
       }}
     />

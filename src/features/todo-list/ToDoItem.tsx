@@ -1,6 +1,8 @@
 import { CheckCircle, Delete, RadioButtonUnchecked } from '@mui/icons-material';
 import { Box, Checkbox, Stack, Typography } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
+import { QUERY_KEY } from '../../constants/key';
+import { PATH } from '../../constants/path';
 import { axiosInstance, queryClient } from '../../libs/query-client';
 import { ToDo } from '../../types/ToDo';
 import dateFormater from '../../utils/dateFormater';
@@ -8,21 +10,21 @@ import dateFormater from '../../utils/dateFormater';
 type ToDoProps = { todo: ToDo };
 
 const markDone = async ({ id, isCompleted }: Pick<ToDo, 'id' | 'isCompleted'>) =>
-  axiosInstance.patch(`/todos/${id}`, { isCompleted });
+  axiosInstance.patch(`${PATH.TODO}/${id}`, { isCompleted });
 
-const deleteToDo = async ({ id }: Pick<ToDo, 'id'>) => axiosInstance.delete(`/todos/${id}`);
+const deleteToDo = async ({ id }: Pick<ToDo, 'id'>) => axiosInstance.delete(`${PATH.TODO}/${id}`);
 
 export const ToDoItem = (props: ToDoProps) => {
   const { todo } = props;
 
   const markDoneMutation = useMutation({
     mutationFn: markDone,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['todos'] })
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY.TODOS] })
   });
 
   const deleteToDoMutation = useMutation({
     mutationFn: deleteToDo,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['todos'] })
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY.TODOS] })
   });
 
   const handleComplete = () => {
@@ -41,10 +43,10 @@ export const ToDoItem = (props: ToDoProps) => {
       direction="row"
       alignItems="center"
       justifyContent="space-between"
-      sx={{
+      sx={(theme) => ({
         bgcolor: 'grey.300',
         minHeight: '85px',
-        padding: '16px 8px',
+        padding: theme.spacing(2, 1),
         borderRadius: 2,
 
         cursor: 'pointer',
@@ -53,11 +55,11 @@ export const ToDoItem = (props: ToDoProps) => {
           transition: 'background-color .15s'
         },
 
-        '&:hover .delete-button': { display: 'flex' }
-      }}
+        '&:hover .delete-button': { opacity: 1 }
+      })}
       onClick={handleComplete}
     >
-      <Stack direction="row" alignItems="center" spacing={1}>
+      <Stack direction="row" alignItems="center" spacing={1} minWidth={0}>
         <Checkbox
           color="primary"
           checked={todo.isCompleted}
@@ -66,8 +68,10 @@ export const ToDoItem = (props: ToDoProps) => {
           icon={<RadioButtonUnchecked />}
           checkedIcon={<CheckCircle />}
         />
-        <Stack>
-          <Typography variant="h5">{todo.title}</Typography>
+        <Stack minWidth={0}>
+          <Typography variant="h5" noWrap>
+            {todo.title}
+          </Typography>
           <Typography color="textDisabled">{dateFormater(todo.createdAt)}</Typography>
         </Stack>
       </Stack>
@@ -75,8 +79,8 @@ export const ToDoItem = (props: ToDoProps) => {
         <Delete
           className="delete-button"
           sx={{
-            display: 'none',
             width: '42px',
+            opacity: 0,
             '&:hover': {
               color: 'error.main',
               cursor: 'pointer'

@@ -5,13 +5,13 @@ import Header from './Header';
 export const MainLayout = () => {
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         backgroundColor: 'grey.200',
-        maxWidth: '500px',
+        maxWidth: theme.breakpoints.values.sm,
         minHeight: '100vh',
         mx: 'auto',
         p: 2
-      }}
+      })}
     >
       <Header />
       <Outlet />

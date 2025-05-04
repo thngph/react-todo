@@ -7,12 +7,10 @@ export const NoToDo = () => {
       component="img"
       src={emptyImage}
       sx={{
-        padding: 2,
         alignSelf: 'center',
-        width: '100%',
-        height: 'auto',
         maxWidth: '300px',
-        margin: '0 auto'
+        margin: '0 auto',
+        flexGrow: 1
       }}
     />
   );
