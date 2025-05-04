@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import { Outlet } from 'react-router';
+import Header from './Header';
 
 export const MainLayout = () => {
   return (
@@ -12,6 +13,7 @@ export const MainLayout = () => {
         p: 2
       }}
     >
+      <Header />
       <Outlet />
     </Box>
   );

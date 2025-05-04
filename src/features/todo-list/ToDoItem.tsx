@@ -7,13 +7,10 @@ import dateFormater from '../../utils/dateFormater';
 
 type ToDoProps = { todo: ToDo };
 
-const markDone = async ({ id, isCompleted }: Pick<ToDo, 'id' | 'isCompleted'>) => {
-  return axiosInstance.patch(`/todos/${id}`, { isCompleted });
-};
+const markDone = async ({ id, isCompleted }: Pick<ToDo, 'id' | 'isCompleted'>) =>
+  axiosInstance.patch(`/todos/${id}`, { isCompleted });
 
-const deleteToDo = async ({ id }: Pick<ToDo, 'id'>) => {
-  return axiosInstance.delete(`/todos/${id}`);
-};
+const deleteToDo = async ({ id }: Pick<ToDo, 'id'>) => axiosInstance.delete(`/todos/${id}`);
 
 export const ToDoItem = (props: ToDoProps) => {
   const { todo } = props;
@@ -56,15 +53,13 @@ export const ToDoItem = (props: ToDoProps) => {
           transition: 'background-color .15s'
         },
 
-        '&:hover .delete-button': {
-          display: 'flex'
-        }
+        '&:hover .delete-button': { display: 'flex' }
       }}
       onClick={handleComplete}
     >
       <Stack direction="row" alignItems="center" spacing={1}>
         <Checkbox
-          color="success"
+          color="primary"
           checked={todo.isCompleted}
           readOnly
           size="medium"
