@@ -54,10 +54,7 @@ export const ToDoItem = (props: ToDoProps) => {
           borderRadius: 2,
 
           cursor: 'pointer',
-          '&:hover': {
-            bgcolor: 'grey.400',
-            transition: 'background-color .15s'
-          }
+          '&:hover': { bgcolor: 'grey.400', transition: 'background-color .15s' }
         })}
         onClick={handleComplete}
       >
@@ -68,26 +65,16 @@ export const ToDoItem = (props: ToDoProps) => {
           size="medium"
           icon={<RadioButtonUnchecked />}
           checkedIcon={<CheckCircle />}
-          sx={{
-            flexShrink: 0
-          }}
+          sx={{ flexShrink: 0 }}
         />
         <Stack flexGrow={1} overflow="hidden">
-          <Typography variant="h5" noWrap>
+          <Typography noWrap variant="h5">
             {todo.title}
           </Typography>
           <Typography color="textDisabled">{dateFormater(todo.createdAt)}</Typography>
         </Stack>
 
-        <Delete
-          sx={{
-            '&:hover': {
-              color: 'error.main',
-              cursor: 'pointer'
-            }
-          }}
-          onClick={handleDelete}
-        />
+        <Delete sx={{ '&:hover': { color: 'error.main', cursor: 'pointer' } }} onClick={handleDelete} />
       </Stack>
     </>
   );
