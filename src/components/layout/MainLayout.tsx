@@ -10,7 +10,8 @@ export const MainLayout = () => {
         maxWidth: theme.breakpoints.values.sm,
         minHeight: '100vh',
         mx: 'auto',
-        p: 2
+        p: 2,
+        position: 'relative'
       })}
     >
       <Header />

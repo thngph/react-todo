@@ -14,9 +14,6 @@ import ToDoItem from './ToDoItem';
 
 const NewToDo = React.lazy(() => import('../new-todo/NewToDo'));
 
-const STALE_TIME = 1000 * 60 * 5; // 5 minutes
-const GC_TIME = 1000 * 60 * 10; // 10 minutes
-
 export const ToDoList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -42,9 +39,7 @@ export const ToDoList = () => {
   const { data } = useQuery({
     queryKey: [QUERY_KEY.TODOS, params],
     queryFn: fetcher<Paginated<ToDo>>(PATH.TODO, { params }),
-    placeholderData: keepPreviousData,
-    staleTime: STALE_TIME,
-    gcTime: GC_TIME
+    placeholderData: keepPreviousData
   });
 
   const { docs: todos, pagination } = data || {};
@@ -52,15 +47,16 @@ export const ToDoList = () => {
   const totalPage = Math.ceil((pagination?._total || 0) / (pagination?._limit || DEFAULT.PAGE_LIMIT));
 
   return (
-    <Stack spacing={2} justifyContent="center" alignItems="center">
-      <Search />
-      <Stack spacing={1} width="100%" sx={(theme) => ({ minHeight: parseInt(theme.spacing(12)) * limit })}>
-        {todos?.length ? todos.map((todo) => <ToDoItem key={todo.id} todo={todo} />) : <NoToDo />}
-      </Stack>
+    <>
       <NewToDo />
-
-      {Number(pagination?._total) > limit && <Pagination count={totalPage} page={page} onChange={handlePageChange} />}
-    </Stack>
+      <Stack spacing={2} justifyContent="center" alignItems="center">
+        <Search />
+        <Stack spacing={1} width={1}>
+          {todos?.length ? todos.map((todo) => <ToDoItem key={todo.id} todo={todo} />) : <NoToDo />}
+        </Stack>
+        {Number(pagination?._total) > limit && <Pagination count={totalPage} page={page} onChange={handlePageChange} />}
+      </Stack>
+    </>
   );
 };
 

@@ -16,7 +16,14 @@ export const NewToDo = () => {
   };
 
   return (
-    <Box mb={2}>
+    <Box
+      sx={{
+        margin: 2,
+        position: 'absolute',
+        bottom: 0,
+        right: 0
+      }}
+    >
       <Tooltip title="Create new To do">
         <Add
           sx={{
