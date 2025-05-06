@@ -46,12 +46,12 @@ export const ToDoItem = (props: ToDoProps) => {
         direction="row"
         alignItems="center"
         justifyContent="space-between"
-        spacing={2}
+        spacing={1}
         sx={(theme) => ({
           bgcolor: 'grey.300',
 
-          padding: theme.spacing(2, 1),
-          borderRadius: 2,
+          padding: theme.spacing(1, 2),
+          borderRadius: 3,
 
           cursor: 'pointer',
           '&:hover': { bgcolor: 'grey.400', transition: 'background-color .15s' }
@@ -68,13 +68,13 @@ export const ToDoItem = (props: ToDoProps) => {
           sx={{ flexShrink: 0 }}
         />
         <Stack flexGrow={1} overflow="hidden">
-          <Typography noWrap variant="h5">
-            {todo.title}
+          <Typography noWrap>{todo.title}</Typography>
+          <Typography variant="body2" color="textDisabled">
+            {dateFormater(todo.createdAt)}
           </Typography>
-          <Typography color="textDisabled">{dateFormater(todo.createdAt)}</Typography>
         </Stack>
 
-        <Delete sx={{ '&:hover': { color: 'error.main', cursor: 'pointer' } }} onClick={handleDelete} />
+        <Delete sx={{ '&:hover': { color: 'error.main', cursor: 'pointer' }, flexShrink: 0 }} onClick={handleDelete} />
       </Stack>
     </>
   );

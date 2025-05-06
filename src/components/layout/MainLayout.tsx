@@ -1,10 +1,12 @@
 import Box from '@mui/material/Box';
 import { Outlet } from 'react-router';
-import Header from './Header';
+import BottomBar from './BottomBar';
+import TopBar from './TopBar';
 
 export const MainLayout = () => {
   return (
     <Box
+      id="app"
       sx={(theme) => ({
         backgroundColor: 'grey.200',
         maxWidth: theme.breakpoints.values.sm,
@@ -14,8 +16,9 @@ export const MainLayout = () => {
         position: 'relative'
       })}
     >
-      <Header />
+      <TopBar />
       <Outlet />
+      <BottomBar />
     </Box>
   );
 };

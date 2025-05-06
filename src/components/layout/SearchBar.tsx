@@ -25,20 +25,18 @@ export const SearchBar = () => {
       placeholder="Search"
       defaultValue={searchParams.get('keyword') || ''}
       fullWidth
-      sx={{
+      sx={(theme) => ({
         borderRadius: 8,
-        marginBottom: 2,
-        input: { cursor: 'pointer' },
+        input: { cursor: 'pointer', padding: theme.spacing(1, 2) },
         '& ::placeholder': { fontSize: 'large' }
-      }}
+      })}
       slotProps={{
         input: {
           endAdornment: <Search sx={{ color: 'grey.500', cursor: 'pointer' }} />,
-          sx: (theme) => ({
+          sx: {
             cursor: 'pointer',
-            borderRadius: 8,
-            padding: theme.spacing(0, 2)
-          })
+            borderRadius: 8
+          }
         }
       }}
     />

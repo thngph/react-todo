@@ -1,71 +1,107 @@
-import { Stack, TextField } from '@mui/material';
+import { Button, Stack, TextField } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React, { useImperativeHandle, useState } from 'react';
-import { v4 as uuid4 } from 'uuid';
+import { useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 import { axiosInstance } from '../../../libs/query-client';
 import { ToDo } from '../../../types/ToDo';
 
-type CreateToDo = Pick<ToDo, 'title'>;
+type NewToDoForm = Pick<ToDo, 'title'>;
+type NewToDoFormErrors = Partial<{
+  [key in keyof NewToDoForm]: string;
+}>;
 
-export type NewToDoFormRef = {
-  submit: () => void;
-  isPending: boolean;
+type NewToDoFormProps = {
+  onClose: () => void;
 };
 
-type Props = {
-  ref?: React.Ref<NewToDoFormRef>;
-  onPendingChange?: (pending: boolean) => void;
-  onSuccess?: () => void;
+const validateForm = (formData: NewToDoForm): NewToDoFormErrors | null => {
+  const errors: NewToDoFormErrors = {};
+
+  if (!formData.title?.trim()) {
+    errors.title = 'Title is required';
+  }
+
+  return Object.keys(errors).length ? errors : null;
 };
 
-const addToDo = (todo: CreateToDo) => {
-  const now = new Date();
+const createToDo = async (formData: NewToDoForm) => {
+  const now = new Date().toISOString();
+
   return axiosInstance.post('/todos', {
-    ...todo,
-    id: uuid4(),
-    isCompleted: false,
+    ...formData,
     createdAt: now,
-    updatedAt: now
+    updatedAt: now,
+    isCompleted: false
   });
 };
 
-const NewToDoForm = ({ ref, onPendingChange, onSuccess }: Props) => {
-  const [formStates, setFormStates] = useState<CreateToDo>({ title: '' });
-  const queryClient = useQueryClient();
+export const NewToDoForm = (props: NewToDoFormProps) => {
+  const { onClose } = props;
 
+  const [errors, setErrors] = useState<NewToDoFormErrors | null>(null);
+  const formRef = useRef<NewToDoForm>({
+    title: ''
+  });
+  const [isDirty, setIsDirty] = useState<boolean>(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.currentTarget;
+    const currentForm = { ...formRef.current, [name]: value };
+
+    const err = validateForm(currentForm);
+    setErrors(err);
+
+    if (!err) {
+      setIsDirty(true);
+      formRef.current = currentForm;
+    }
+  };
+
+  const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: addToDo,
-    onMutate: () => onPendingChange?.(true),
-    onSettled: () => onPendingChange?.(false),
+    mutationFn: createToDo,
     onSuccess: () => {
-      onSuccess?.();
       queryClient.invalidateQueries({ queryKey: ['todos'] });
+      onClose();
+    },
+    onError: () => {
+      toast.error('Failed to create todo');
     }
   });
 
-  const handleSubmit = (ev?: React.FormEvent<HTMLFormElement>) => {
-    if (ev) ev.preventDefault();
-    mutation.mutate(formStates);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const errors = validateForm(formRef.current);
+    if (errors) {
+      setErrors(errors);
+      return;
+    }
+
+    mutation.mutate(formRef.current);
   };
 
-  useImperativeHandle(ref, () => ({
-    submit: () => handleSubmit(),
-    isPending: mutation.isPending
-  }));
-
   return (
-    <form onSubmit={handleSubmit}>
-      <Stack spacing={2}>
-        <TextField
-          autoFocus
-          variant="standard"
-          fullWidth
-          onChange={(ev) => setFormStates({ ...formStates, title: ev.target.value })}
-          value={formStates.title}
-          placeholder="Title"
-        />
+    <Stack component="form" sx={{ padding: 2 }} spacing={2} onSubmit={handleSubmit}>
+      <TextField
+        label="Title*"
+        name="title"
+        variant="outlined"
+        fullWidth
+        error={!!errors?.title}
+        helperText={errors?.title}
+        autoFocus
+        onChange={handleChange}
+      />
+      <Stack spacing={1} direction="row" justifyContent="end">
+        <Button variant="contained" loading={mutation.isPending} disabled={!!errors || !isDirty} type="submit">
+          Create
+        </Button>
+
+        <Button variant="outlined" onClick={onClose}>
+          Close
+        </Button>
       </Stack>
-    </form>
+    </Stack>
   );
 };
 

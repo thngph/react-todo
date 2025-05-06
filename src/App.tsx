@@ -2,6 +2,7 @@ import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 import { RouterProvider } from 'react-router';
+import { ToastContainer } from 'react-toastify';
 import { queryClient } from './libs/query-client';
 import router from './routes/router';
 
@@ -13,16 +14,16 @@ const theme = createTheme({
 
 function App() {
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <ErrorBoundary fallback={<div>Something went wrong</div>}>
-          <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router} />
-          </QueryClientProvider>
-        </ErrorBoundary>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <ErrorBoundary fallback={<div>Something went wrong</div>}>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+
+        <ToastContainer position="top-right" />
+      </ErrorBoundary>
+    </ThemeProvider>
   );
 }
 

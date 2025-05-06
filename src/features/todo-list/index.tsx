@@ -1,6 +1,5 @@
 import { Pagination, Stack } from '@mui/material';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import React from 'react';
 import { useSearchParams } from 'react-router';
 import Search from '../../components/layout/SearchBar';
 import { DEFAULT } from '../../constants/default';
@@ -11,8 +10,7 @@ import { Paginated } from '../../types/Paginated';
 import { ToDo } from '../../types/ToDo';
 import { NoToDo } from './NoToDo';
 import ToDoItem from './ToDoItem';
-
-const NewToDo = React.lazy(() => import('../new-todo/NewToDo'));
+import ToDoLoading from './ToDoLoading';
 
 export const ToDoList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -31,12 +29,12 @@ export const ToDoList = () => {
     ...(keyword && { title_like: keyword })
   };
 
-  const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
-    searchParams.set(SEARCH_PARAM_KEY.PAGE, value.toString());
+  const handlePageChange = (page: number) => {
+    searchParams.set(SEARCH_PARAM_KEY.PAGE, page.toString());
     setSearchParams(searchParams);
   };
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: [QUERY_KEY.TODOS, params],
     queryFn: fetcher<Paginated<ToDo>>(PATH.TODO, { params }),
     placeholderData: keepPreviousData
@@ -46,15 +44,27 @@ export const ToDoList = () => {
 
   const totalPage = Math.ceil((pagination?._total || 0) / (pagination?._limit || DEFAULT.PAGE_LIMIT));
 
+  if (totalPage < page) {
+    searchParams.set('page', '1');
+    setSearchParams(searchParams);
+  }
+
   return (
     <>
-      <NewToDo />
-      <Stack spacing={2} justifyContent="center" alignItems="center">
+      <Stack spacing={3} justifyContent="center" alignItems="center" id="ghf">
         <Search />
-        <Stack spacing={1} width={1}>
-          {todos?.length ? todos.map((todo) => <ToDoItem key={todo.id} todo={todo} />) : <NoToDo />}
-        </Stack>
-        {Number(pagination?._total) > limit && <Pagination count={totalPage} page={page} onChange={handlePageChange} />}
+        {isLoading ? (
+          <ToDoLoading />
+        ) : (
+          <>
+            <Stack spacing={1} width={1}>
+              {todos?.length ? todos.map((todo) => <ToDoItem key={todo.id} todo={todo} />) : <NoToDo />}
+            </Stack>
+            {Number(pagination?._total) > limit && (
+              <Pagination count={totalPage} page={page} onChange={(_, p) => handlePageChange(p)} />
+            )}
+          </>
+        )}
       </Stack>
     </>
   );

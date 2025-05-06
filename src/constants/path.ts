@@ -1,3 +1,4 @@
 export const PATH = {
-  TODO: '/todos'
+  TODO: '/todos',
+  CATEGORY: '/categories'
 };

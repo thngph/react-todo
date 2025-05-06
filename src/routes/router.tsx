@@ -3,6 +3,7 @@ import { createBrowserRouter, Navigate } from 'react-router';
 import MainLayout from '../components/layout/MainLayout';
 import { Loader } from '../components/Loader';
 import ServerError from '../components/ServerError';
+import CategoryList from '../features/category-list';
 import ToDoLoading from '../features/todo-list/ToDoLoading';
 
 const ToDoList = React.lazy(() => import('../features/todo-list'));
@@ -13,14 +14,22 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        path: '/',
+        path: '/todo',
         element: (
           <Loader suspense={<ToDoLoading />} fallback={<ServerError />}>
             <ToDoList />
           </Loader>
         )
       },
-      { path: '*', element: <Navigate to={'/'} /> }
+      {
+        path: '/category',
+        element: (
+          <Loader suspense={<ToDoLoading />} fallback={<ServerError />}>
+            <CategoryList />
+          </Loader>
+        )
+      },
+      { path: '*', element: <Navigate to={'/todo'} /> }
     ]
   }
 ]);
