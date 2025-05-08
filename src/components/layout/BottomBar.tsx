@@ -1,5 +1,5 @@
-import { Category, PlaylistAdd } from '@mui/icons-material';
-import { Button, Stack } from '@mui/material';
+import { Add, Category, PlaylistAdd } from '@mui/icons-material';
+import { Box, IconButton, Stack } from '@mui/material';
 import { JSX, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import NewToDoPopup from '../../features/new-todo';
@@ -24,34 +24,37 @@ export const BottomBar = () => {
   const isActive = (item: NavItem) => pathname === item.to;
 
   return (
-    <>
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        sx={{ position: 'absolute', bottom: 0, left: 0, padding: 2, width: 1 }}
+    <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ padding: 2, flexShrink: 0 }}>
+      <IconButton
+        sx={{
+          bgcolor: 'primary.main',
+          position: 'absolute',
+          left: '50%',
+          padding: 2,
+          transform: 'translate(-50%)'
+        }}
+        onClick={() => setOpen(true)}
       >
-        {navItems.map((item) => (
-          <Stack
-            key={item.key}
-            onClick={() => navigate(item.to)}
-            sx={{
-              cursor: 'pointer',
-              color: isActive(item) ? 'primary.main' : 'text.secondary',
-              '&:hover': {
-                color: 'primary.main'
-              }
-            }}
-          >
-            {item.icon}
-          </Stack>
-        ))}
-        <Button variant="outlined" onClick={() => setOpen(true)}>
-          create
-        </Button>
-        <NewToDoPopup open={open} onClose={() => setOpen(false)} />
-      </Stack>
-    </>
+        <Add />
+      </IconButton>
+      {navItems.map((item) => (
+        <Box
+          key={item.key}
+          onClick={() => navigate(item.to)}
+          sx={{
+            cursor: 'pointer',
+            color: isActive(item) ? 'primary.main' : 'text.secondary',
+            '&:hover': {
+              color: 'primary.main'
+            }
+          }}
+        >
+          {item.icon}
+        </Box>
+      ))}
+
+      <NewToDoPopup open={open} onClose={() => setOpen(false)} />
+    </Stack>
   );
 };
 

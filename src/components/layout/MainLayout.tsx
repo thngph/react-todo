@@ -1,25 +1,26 @@
-import Box from '@mui/material/Box';
+import { Box, Stack } from '@mui/material';
 import { Outlet } from 'react-router';
 import BottomBar from './BottomBar';
 import TopBar from './TopBar';
 
 export const MainLayout = () => {
   return (
-    <Box
-      id="app"
+    <Stack
       sx={(theme) => ({
         backgroundColor: 'grey.200',
         maxWidth: theme.breakpoints.values.sm,
-        minHeight: '100vh',
         mx: 'auto',
-        p: 2,
-        position: 'relative'
+        position: 'relative',
+        height: '100vh',
+        overflow: 'hidden'
       })}
     >
       <TopBar />
-      <Outlet />
+      <Box overflow="auto" mt="auto" flexGrow={1}>
+        <Outlet />
+      </Box>
       <BottomBar />
-    </Box>
+    </Stack>
   );
 };
 

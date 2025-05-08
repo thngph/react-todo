@@ -20,7 +20,6 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
         </QueryClientProvider>
-
         <ToastContainer position="top-right" />
       </ErrorBoundary>
     </ThemeProvider>

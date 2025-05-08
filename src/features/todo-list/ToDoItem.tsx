@@ -7,15 +7,13 @@ import { axiosInstance } from '../../libs/query-client';
 import { ToDo } from '../../types/ToDo';
 import dateFormater from '../../utils/dateFormater';
 
-type ToDoProps = { todo: ToDo };
+type ToDoProps = { todo: ToDo; onDelete: () => void };
 
 const markDone = async ({ id, isCompleted }: Pick<ToDo, 'id' | 'isCompleted'>) =>
   axiosInstance.patch(`${PATH.TODO}/${id}`, { isCompleted });
 
-const deleteToDo = async ({ id }: Pick<ToDo, 'id'>) => axiosInstance.delete(`${PATH.TODO}/${id}`);
-
 export const ToDoItem = (props: ToDoProps) => {
-  const { todo } = props;
+  const { todo, onDelete } = props;
 
   const queryClient = useQueryClient();
 
@@ -24,20 +22,8 @@ export const ToDoItem = (props: ToDoProps) => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY.TODOS] })
   });
 
-  const deleteToDoMutation = useMutation({
-    mutationFn: deleteToDo,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY.TODOS] })
-  });
-
   const handleComplete = () => {
     markDoneMutation.mutate({ id: todo.id, isCompleted: !todo.isCompleted });
-  };
-
-  const handleDelete = (ev: React.MouseEvent) => {
-    ev.stopPropagation();
-    ev.preventDefault();
-    if (deleteToDoMutation.isPending) return;
-    deleteToDoMutation.mutate({ id: todo.id });
   };
 
   return (
@@ -73,8 +59,16 @@ export const ToDoItem = (props: ToDoProps) => {
             {dateFormater(todo.createdAt)}
           </Typography>
         </Stack>
-
-        <Delete sx={{ '&:hover': { color: 'error.main', cursor: 'pointer' }, flexShrink: 0 }} onClick={handleDelete} />
+        <Stack
+          direction="row"
+          sx={{ width: '32px', height: '32px', justifyContent: 'flex-end', alignItems: 'center' }}
+          onClick={(ev) => {
+            ev.stopPropagation();
+            onDelete();
+          }}
+        >
+          <Delete sx={{ '&:hover': { color: 'error.main', cursor: 'pointer' }, flexShrink: 0 }} />
+        </Stack>
       </Stack>
     </>
   );

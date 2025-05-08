@@ -93,12 +93,11 @@ export const NewToDoForm = (props: NewToDoFormProps) => {
         onChange={handleChange}
       />
       <Stack spacing={1} direction="row" justifyContent="end">
-        <Button variant="contained" loading={mutation.isPending} disabled={!!errors || !isDirty} type="submit">
-          Create
-        </Button>
-
         <Button variant="outlined" onClick={onClose}>
           Close
+        </Button>
+        <Button variant="contained" loading={mutation.isPending} disabled={!!errors || !isDirty} type="submit">
+          Create
         </Button>
       </Stack>
     </Stack>

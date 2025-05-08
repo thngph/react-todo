@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
-import emptyImage from '../../assets/empty.svg';
+import emptyImage from '../assets/empty.svg';
 
-export const NoToDo = () => {
+export const Empty = () => {
   return (
     <Box
       component="img"
