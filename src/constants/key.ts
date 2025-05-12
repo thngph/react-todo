@@ -1,5 +1,6 @@
 export const QUERY_KEY = {
-  TODOS: 'todos'
+  TODOS: 'todos',
+  CATEGORIES: 'categories'
 };
 
 export const SEARCH_PARAM_KEY = {

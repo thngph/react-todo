@@ -2,7 +2,9 @@ import { Button, Dialog, DialogActions, DialogContent, Pagination, Stack, Typogr
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router';
+import { match } from 'ts-pattern';
 import { Empty } from '../../components/Empty';
+import { FilterBar } from '../../components/layout/FilterBar';
 import Search from '../../components/layout/SearchBar';
 import { DEFAULT } from '../../constants/default';
 import { QUERY_KEY, SEARCH_PARAM_KEY } from '../../constants/key';
@@ -20,16 +22,24 @@ export const ToDoList = () => {
   const [deletingTodo, setDeletingTodo] = useState<ToDo | null>(null);
 
   const keyword = searchParams.get(SEARCH_PARAM_KEY.KEYWORD) || '';
+  const filter = searchParams.get(SEARCH_PARAM_KEY.FILTER) || 'ALL';
+
   const [page, limit] = [
     Number(searchParams.get(SEARCH_PARAM_KEY.PAGE)) || 1,
     Number(searchParams.get(SEARCH_PARAM_KEY.LIMIT)) || DEFAULT.PAGE_LIMIT
   ];
+
+  const isCompleted = match(filter)
+    .with('DONE', () => true)
+    .with('TODO', () => false)
+    .otherwise(() => undefined);
 
   const params = {
     _limit: limit,
     _page: page,
     _sort: 'createdAt',
     _order: 'desc',
+    isCompleted: isCompleted,
     ...(keyword && { title_like: keyword })
   };
 
@@ -71,8 +81,10 @@ export const ToDoList = () => {
   }, [totalPage, page]);
 
   return (
-    <Stack spacing={3} alignItems="center" justifyContent="space-between" sx={{ p: 2 }}>
+    <Stack spacing={3} padding={2} alignItems="center" justifyContent="space-between">
       <Search />
+      <FilterBar />
+
       {isLoading ? (
         <ToDoLoading />
       ) : todos?.length ? (

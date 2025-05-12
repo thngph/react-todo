@@ -1,3 +1,4 @@
+import { Grid } from '@mui/material';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router';
 import { DEFAULT } from '../../constants/default';
@@ -23,7 +24,7 @@ export const CategoryList = () => {
     _order: 'desc'
   };
   const { data } = useQuery({
-    queryKey: [QUERY_KEY.TODOS, params],
+    queryKey: [QUERY_KEY.CATEGORIES, params],
     queryFn: fetcher<Paginated<Category>>(PATH.CATEGORY, { params }),
     placeholderData: keepPreviousData
   });
@@ -31,13 +32,17 @@ export const CategoryList = () => {
   const { docs: categories } = data || {};
 
   return (
-    <>
+    <Grid container spacing={2} padding={2} justifyContent="flex-start">
       {categories?.length ? (
-        categories.map((category) => <CategoryItem key={category.id} category={category} />)
+        [...categories, ...categories].map((category) => (
+          <Grid key={category.id} size={3}>
+            <CategoryItem category={category} />
+          </Grid>
+        ))
       ) : (
         <div>No Category</div>
       )}
-    </>
+    </Grid>
   );
 };
 

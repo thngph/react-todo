@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import emptyImage from '../assets/empty.svg';
+import emptyImage from '../../public/empty.svg';
 
 export const Empty = () => {
   return (
