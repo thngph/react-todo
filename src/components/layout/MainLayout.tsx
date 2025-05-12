@@ -7,7 +7,7 @@ export const MainLayout = () => {
   return (
     <Stack
       sx={(theme) => ({
-        backgroundColor: 'grey.200',
+        backgroundColor: theme.palette.background.default,
         maxWidth: theme.breakpoints.values.sm,
         mx: 'auto',
         position: 'relative',

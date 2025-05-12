@@ -82,8 +82,10 @@ export const ToDoList = () => {
 
   return (
     <Stack spacing={3} padding={2} alignItems="center" justifyContent="space-between">
-      <Search />
-      <FilterBar />
+      <Stack width={1} spacing={1}>
+        <Search />
+        <FilterBar />
+      </Stack>
 
       {isLoading ? (
         <ToDoLoading />

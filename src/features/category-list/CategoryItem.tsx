@@ -7,12 +7,22 @@ export const CategoryItem = (props: CategoryItemProps) => {
   const { category } = props;
 
   return (
-    <Box sx={{ flexGrow: 1, borderRadius: 3, width: 1 }}>
-      <Stack justifyContent="center" alignItems="center" sx={{ bgcolor: category.color }}>
-        <Box component="img" src={category.icon} sx={{ width: '60%' }} />
-      </Stack>
+    <Stack alignItems="center" sx={{ cursor: 'pointer' }}>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        borderRadius={8}
+        sx={(theme) => ({
+          bgcolor: category.color,
+          width: theme.spacing(12),
+          height: theme.spacing(12)
+        })}
+      >
+        <Box component="img" src={category.icon} sx={{ width: '50%' }} />
+      </Box>
       <Typography>{category.name}</Typography>
-    </Box>
+    </Stack>
   );
 };
 export default CategoryItem;

@@ -27,50 +27,48 @@ export const ToDoItem = (props: ToDoProps) => {
   };
 
   return (
-    <>
+    <Stack
+      direction="row"
+      alignItems="center"
+      justifyContent="space-between"
+      spacing={1}
+      sx={(theme) => ({
+        bgcolor: 'grey.300',
+
+        padding: theme.spacing(1, 2),
+        borderRadius: 3,
+
+        cursor: 'pointer',
+        '&:hover': { bgcolor: 'grey.400', transition: 'background-color .15s' }
+      })}
+      onClick={handleComplete}
+    >
+      <Checkbox
+        color="primary"
+        checked={todo.isCompleted}
+        readOnly
+        size="medium"
+        icon={<RadioButtonUnchecked />}
+        checkedIcon={<CheckCircle />}
+        sx={{ flexShrink: 0 }}
+      />
+      <Stack flexGrow={1} overflow="hidden">
+        <Typography noWrap>{todo.title}</Typography>
+        <Typography variant="body2" color="textDisabled">
+          {dateFormater(todo.createdAt)}
+        </Typography>
+      </Stack>
       <Stack
         direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        spacing={1}
-        sx={(theme) => ({
-          bgcolor: 'grey.300',
-
-          padding: theme.spacing(1, 2),
-          borderRadius: 3,
-
-          cursor: 'pointer',
-          '&:hover': { bgcolor: 'grey.400', transition: 'background-color .15s' }
-        })}
-        onClick={handleComplete}
+        sx={{ width: '32px', height: '32px', justifyContent: 'flex-end', alignItems: 'center' }}
+        onClick={(ev) => {
+          ev.stopPropagation();
+          onDelete();
+        }}
       >
-        <Checkbox
-          color="primary"
-          checked={todo.isCompleted}
-          readOnly
-          size="medium"
-          icon={<RadioButtonUnchecked />}
-          checkedIcon={<CheckCircle />}
-          sx={{ flexShrink: 0 }}
-        />
-        <Stack flexGrow={1} overflow="hidden">
-          <Typography noWrap>{todo.title}</Typography>
-          <Typography variant="body2" color="textDisabled">
-            {dateFormater(todo.createdAt)}
-          </Typography>
-        </Stack>
-        <Stack
-          direction="row"
-          sx={{ width: '32px', height: '32px', justifyContent: 'flex-end', alignItems: 'center' }}
-          onClick={(ev) => {
-            ev.stopPropagation();
-            onDelete();
-          }}
-        >
-          <Delete sx={{ '&:hover': { color: 'error.main', cursor: 'pointer' }, flexShrink: 0 }} />
-        </Stack>
+        <Delete sx={{ '&:hover': { color: 'error.main', cursor: 'pointer' }, flexShrink: 0 }} />
       </Stack>
-    </>
+    </Stack>
   );
 };
 

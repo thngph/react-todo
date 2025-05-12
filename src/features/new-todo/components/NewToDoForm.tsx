@@ -38,10 +38,10 @@ const createToDo = async (formData: NewToDoForm) => {
 export const NewToDoForm = (props: NewToDoFormProps) => {
   const { onClose } = props;
 
-  const [errors, setErrors] = useState<NewToDoFormErrors | null>(null);
   const formRef = useRef<NewToDoForm>({
     title: ''
   });
+  const [errors, setErrors] = useState<NewToDoFormErrors | null>(null);
   const [isDirty, setIsDirty] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

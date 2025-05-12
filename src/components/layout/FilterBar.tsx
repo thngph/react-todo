@@ -31,7 +31,7 @@ export const FilterBar = (props: FilterBarProps) => {
     [`& .${toggleButtonGroupClasses.grouped}`]: {
       border: 0,
       borderRadius: 3,
-      minWidth: '50px',
+      minWidth: '65px',
       [`&.${toggleButtonGroupClasses.disabled}`]: {
         border: 0
       }
