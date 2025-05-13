@@ -45,8 +45,7 @@ export const NewCategoryForm = (props: NewCategoryFormProps) => {
 
   const handleSearch = React.useCallback(
     useDebounce((ev: React.ChangeEvent<HTMLInputElement>) => {
-      const search = ev.target.value.trim();
-      setSearch(search);
+      setSearch(ev.target.value.trim());
     }, 200),
     []
   );
@@ -59,19 +58,17 @@ export const NewCategoryForm = (props: NewCategoryFormProps) => {
       onClose();
     },
     onError: () => {
-      toast.error('Failed to create todo');
+      toast.error('Failed to create category');
     }
   });
 
+  const onSubmit = (data: NewCategoryForm) => mutation.mutate(data);
+
   return (
-    <Stack
-      component="form"
-      sx={{ padding: 2, borderRadius: 3 }}
-      spacing={2}
-      onSubmit={handleSubmit((data) => mutation.mutate(data))}
-    >
+    <Stack component="form" sx={{ padding: 2, borderRadius: 3 }} spacing={2} onSubmit={handleSubmit(onSubmit)}>
       <Typography variant="h6">New Category</Typography>
 
+      {/* Name Field */}
       <TextField
         label="Name*"
         {...register('name', { required: 'Name is required' })}
@@ -80,6 +77,7 @@ export const NewCategoryForm = (props: NewCategoryFormProps) => {
         fullWidth
       />
 
+      {/* Icon and Color Fields */}
       <Stack direction="row" justifyContent="space-between" spacing={1}>
         <Controller
           name="icon"
@@ -93,14 +91,11 @@ export const NewCategoryForm = (props: NewCategoryFormProps) => {
                 field.onChange(newValue);
               }}
               sx={{ flexGrow: 1 }}
-              renderOption={(props, option) => {
-                const { key, ...optionProps } = props;
-                return (
-                  <Box key={key} component="li" sx={{ '& > img': { flexShrink: 0 } }} {...optionProps}>
-                    <img loading="lazy" width="20" src={option} alt="" />
-                  </Box>
-                );
-              }}
+              renderOption={(props, option) => (
+                <Box component="li" sx={{ '& > img': { flexShrink: 0 } }} {...props}>
+                  <img loading="lazy" width="20" src={option} alt="" />
+                </Box>
+              )}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -130,6 +125,7 @@ export const NewCategoryForm = (props: NewCategoryFormProps) => {
         />
       </Stack>
 
+      {/* Action Buttons */}
       <Stack spacing={1} direction="row" justifyContent="end">
         <Button variant="outlined" onClick={onClose}>
           Close

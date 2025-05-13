@@ -24,8 +24,7 @@ yarn start
 4. In a new terminal, start the React application:
 
 ```
-# Return to the project root directory if needed
-cd /home/thinhnp/projects/react-todo
+# Return to the project root directory
 yarn install
 yarn dev
 ```
