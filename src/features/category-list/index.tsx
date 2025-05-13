@@ -1,4 +1,5 @@
-import { Button, Grid } from '@mui/material';
+import { Add } from '@mui/icons-material';
+import { Grid, Stack, Typography } from '@mui/material';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useSearchParams } from 'react-router';
@@ -36,19 +37,31 @@ export const CategoryList = () => {
 
   return (
     <>
-      <Grid container spacing={2} padding={2} justifyContent="flex-start">
-        {categories?.length ? (
+      <Grid container spacing={2} padding={2} justifyContent="flex-start" sx={{ color: 'grey.500' }}>
+        {categories?.length &&
           [...categories, ...categories].map((category, i) => (
             <Grid key={category.id + i} size={3}>
               <CategoryItem category={category} />
             </Grid>
-          ))
-        ) : (
-          <div>No Category</div>
-        )}
-        <Button key={999} onClick={() => setOpen(true)}>
-          aa
-        </Button>
+          ))}
+
+        <Grid size={3} sx={{ cursor: 'pointer' }} onClick={() => setOpen(true)}>
+          <Stack alignItems="center">
+            <Stack
+              sx={(theme) => ({
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '1px dashed',
+                width: theme.spacing(12),
+                height: theme.spacing(12),
+                borderRadius: 8
+              })}
+            >
+              <Add />
+            </Stack>
+            <Typography>Add new</Typography>
+          </Stack>
+        </Grid>
       </Grid>
       <NewCategoryPopup open={open} onClose={() => setOpen(false)}></NewCategoryPopup>
     </>

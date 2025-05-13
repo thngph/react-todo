@@ -12,8 +12,8 @@ import { PATH } from '../../constants/path';
 import { axiosInstance, fetcher } from '../../libs/query-client';
 import { Paginated } from '../../types/Paginated';
 import { ToDo } from '../../types/ToDo';
-import ToDoItem from './ToDoItem';
-import ToDoLoading from './ToDoLoading';
+import ToDoItem from './components/ToDoItem';
+import ToDoLoading from './components/ToDoLoading';
 
 const deleteToDo = async ({ id }: Pick<ToDo, 'id'>) => axiosInstance.delete(`${PATH.TODO}/${id}`);
 export const ToDoList = () => {

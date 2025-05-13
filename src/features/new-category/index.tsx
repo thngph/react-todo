@@ -1,4 +1,5 @@
 import { Dialog } from '@mui/material';
+import { NewCategoryForm } from './components/NewCategoryForm';
 
 type NewCategoryPopupProps = {
   open: boolean;
@@ -10,7 +11,7 @@ export const NewCategoryPopup = (props: NewCategoryPopupProps) => {
 
   return (
     <Dialog open={open} onClose={onClose}>
-      abc
+      <NewCategoryForm onClose={onClose} />
     </Dialog>
   );
 };

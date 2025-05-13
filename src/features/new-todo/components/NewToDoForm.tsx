@@ -1,28 +1,16 @@
-import { Button, Stack, TextField } from '@mui/material';
+import { Button, Stack, TextField, Typography } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { axiosInstance } from '../../../libs/query-client';
 import { ToDo } from '../../../types/ToDo';
 
 type NewToDoForm = Pick<ToDo, 'title'>;
-type NewToDoFormErrors = Partial<{
-  [key in keyof NewToDoForm]: string;
-}>;
 
 type NewToDoFormProps = {
   onClose: () => void;
 };
-
-const validateForm = (formData: NewToDoForm): NewToDoFormErrors | null => {
-  const errors: NewToDoFormErrors = {};
-
-  if (!formData.title?.trim()) {
-    errors.title = 'Title is required';
-  }
-
-  return Object.keys(errors).length ? errors : null;
-};
+const defaultValues: NewToDoForm = { title: '' };
 
 const createToDo = async (formData: NewToDoForm) => {
   const now = new Date().toISOString();
@@ -38,25 +26,6 @@ const createToDo = async (formData: NewToDoForm) => {
 export const NewToDoForm = (props: NewToDoFormProps) => {
   const { onClose } = props;
 
-  const formRef = useRef<NewToDoForm>({
-    title: ''
-  });
-  const [errors, setErrors] = useState<NewToDoFormErrors | null>(null);
-  const [isDirty, setIsDirty] = useState<boolean>(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.currentTarget;
-    const currentForm = { ...formRef.current, [name]: value };
-
-    const err = validateForm(currentForm);
-    setErrors(err);
-
-    if (!err) {
-      setIsDirty(true);
-      formRef.current = currentForm;
-    }
-  };
-
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: createToDo,
@@ -69,34 +38,35 @@ export const NewToDoForm = (props: NewToDoFormProps) => {
     }
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const errors = validateForm(formRef.current);
-    if (errors) {
-      setErrors(errors);
-      return;
-    }
-
-    mutation.mutate(formRef.current);
-  };
+  const {
+    handleSubmit,
+    formState: { errors },
+    register
+  } = useForm({ defaultValues, mode: 'all' });
 
   return (
-    <Stack component="form" sx={{ padding: 2 }} spacing={2} onSubmit={handleSubmit}>
+    <Stack
+      component="form"
+      sx={{ padding: 2, borderRadius: 3 }}
+      spacing={2}
+      onSubmit={handleSubmit((data) => mutation.mutate(data))}
+    >
+      <Typography variant="h6">New Todo</Typography>
+
       <TextField
         label="Title*"
-        name="title"
         variant="outlined"
+        {...register('title', { required: 'Title is required' })}
+        error={Boolean(errors.title)}
+        helperText={errors?.title?.message}
         fullWidth
-        error={!!errors?.title}
-        helperText={errors?.title}
-        autoFocus
-        onChange={handleChange}
       />
+
       <Stack spacing={1} direction="row" justifyContent="end">
         <Button variant="outlined" onClick={onClose}>
           Close
         </Button>
-        <Button variant="contained" loading={mutation.isPending} disabled={!!errors || !isDirty} type="submit">
+        <Button variant="contained" loading={mutation.isPending} type="submit">
           Create
         </Button>
       </Stack>

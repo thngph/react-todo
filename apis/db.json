@@ -5,7 +5,8 @@
       "createdAt": "2025-05-08T09:08:27.320Z",
       "updatedAt": "2025-05-08T09:08:27.320Z",
       "isCompleted": true,
-      "id": "icaWU1M"
+      "id": "icaWU1M",
+      "categoryId": "cd221d02-ae06-4575-8a69-dffe4a39f450"
     },
     {
       "title": "wash\\ car",
@@ -29,32 +30,11 @@
       "id": "GE-U_W7"
     },
     {
-      "title": "aasdsdfkn",
-      "createdAt": "2025-05-12T15:48:10.447Z",
-      "updatedAt": "2025-05-12T15:48:10.447Z",
-      "isCompleted": false,
-      "id": "-X7b5vH"
-    },
-    {
       "title": "asdasasd",
       "createdAt": "2025-05-12T15:48:13.822Z",
       "updatedAt": "2025-05-12T15:48:13.822Z",
-      "isCompleted": false,
+      "isCompleted": true,
       "id": "yaY3TYx"
-    },
-    {
-      "title": "asddsasd",
-      "createdAt": "2025-05-12T15:48:16.759Z",
-      "updatedAt": "2025-05-12T15:48:16.759Z",
-      "isCompleted": false,
-      "id": "VkUKtNB"
-    },
-    {
-      "title": "asdasdsadasd",
-      "createdAt": "2025-05-12T15:48:19.789Z",
-      "updatedAt": "2025-05-12T15:48:19.789Z",
-      "isCompleted": false,
-      "id": "0R4-zI6"
     },
     {
       "title": "asdasdasdasd",
@@ -64,18 +44,11 @@
       "id": "P7Of52S"
     },
     {
-      "title": "asdasdasdasd",
-      "createdAt": "2025-05-12T15:48:24.305Z",
-      "updatedAt": "2025-05-12T15:48:24.305Z",
+      "title": "sdasdasfsa",
+      "createdAt": "2025-05-13T07:24:26.122Z",
+      "updatedAt": "2025-05-13T07:24:26.122Z",
       "isCompleted": false,
-      "id": "jkYzzjo"
-    },
-    {
-      "title": "asdasdasdasd",
-      "createdAt": "2025-05-12T15:48:27.772Z",
-      "updatedAt": "2025-05-12T15:48:27.772Z",
-      "isCompleted": false,
-      "id": "znYMr7H"
+      "id": "pODLbsg"
     }
   ],
   "categories": [

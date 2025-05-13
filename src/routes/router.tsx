@@ -4,7 +4,7 @@ import MainLayout from '../components/layout/MainLayout';
 import { Loader } from '../components/Loader';
 import ServerError from '../components/ServerError';
 import CategoryList from '../features/category-list';
-import ToDoLoading from '../features/todo-list/ToDoLoading';
+import ToDoLoading from '../features/todo-list/components/ToDoLoading';
 
 const ToDoList = React.lazy(() => import('../features/todo-list'));
 
