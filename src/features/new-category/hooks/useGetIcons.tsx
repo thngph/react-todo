@@ -7,6 +7,7 @@ type GetIconProps = {
   limit?: number;
   search?: string;
 };
+
 export const useGetIcons = (props?: GetIconProps) => {
   const { limit = 10, search = '' } = props || {};
 
@@ -19,13 +20,12 @@ export const useGetIcons = (props?: GetIconProps) => {
 
   if (isLoading) return [];
 
-  let icons: string[] = Object.values(data?.categories).flatMap((v) => v) as string[];
+  const filteredIcons = (Object.values(data?.categories) as string[])
+    .flatMap((v) => v)
+    .filter((icon) => (search ? icon.includes(search) : true))
+    .slice(0, limit);
 
-  if (search) icons = icons.filter((icon) => icon.includes(search));
-
-  if (limit) icons = icons.slice(0, limit);
-
-  return icons.map((icon) => `${CONFIG.ICONIFY_API_URI}/${CONFIG.CATEGORY_ICON_PREFIX}/${icon}.svg`);
+  return filteredIcons.map((icon) => `${CONFIG.ICONIFY_API_URI}/${CONFIG.CATEGORY_ICON_PREFIX}/${icon}.svg`);
 };
 
 export default useGetIcons;

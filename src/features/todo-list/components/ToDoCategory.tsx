@@ -1,5 +1,5 @@
 import { Box, Stack } from '@mui/material';
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEY } from '../../../constants/key';
 import { PATH } from '../../../constants/path';
 import { fetcher } from '../../../libs/query-client';
@@ -12,8 +12,7 @@ export const ToDoCategory = (props: ToDoCategoryProps) => {
 
   const { data: category } = useQuery({
     queryKey: [QUERY_KEY.CATEGORIES],
-    queryFn: fetcher<Category>(`${PATH.CATEGORY}/${id}`),
-    placeholderData: keepPreviousData
+    queryFn: fetcher<Category>(`${PATH.CATEGORY}/${id}`)
   });
 
   if (!category) return null;

@@ -1,4 +1,4 @@
-import { Box, Stack } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 import logo from '../../../public/logo.svg';
 export const TopBar = () => {
@@ -6,14 +6,29 @@ export const TopBar = () => {
 
   return (
     <Stack
-      justifyContent="space-between"
+      justifyContent="flex-start"
+      alignItems="center"
       direction="row"
+      spacing={2}
       sx={{
         flexShrink: 0,
-        p: 2
+        padding: 2
       }}
     >
-      <Box component="img" src={logo} onClick={() => navigate('/')} sx={{ width: '30px', cursor: 'pointer' }} />
+      <Box
+        component="img"
+        src={logo}
+        onClick={() => navigate('/')}
+        sx={(theme) => ({
+          cursor: 'pointer',
+          backgroundColor: theme.palette.primary.main,
+          borderRadius: 8,
+          padding: 1
+        })}
+      />
+      <Typography variant="h4" color="primary">
+        Todo
+      </Typography>
     </Stack>
   );
 };

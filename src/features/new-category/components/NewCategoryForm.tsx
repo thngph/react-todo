@@ -1,7 +1,11 @@
 import { Autocomplete, Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { QUERY_KEY } from '../../../constants/key';
 import useDebounce from '../../../hooks/useDebounce';
+import { axiosInstance } from '../../../libs/query-client';
 import { Category } from '../../../types/Category';
 import useGetIcons from '../hooks/useGetIcons';
 
@@ -9,11 +13,20 @@ type NewCategoryFormProps = {
   onClose: () => void;
 };
 
-type NewCategoryForm = Omit<Category, 'id'>;
+type NewCategoryForm = Partial<Omit<Category, 'id'>>;
 const defaultValues: NewCategoryForm = {
-  name: '',
-  icon: '',
-  color: '#6573c3'
+  color: '#6573c3',
+  icon: ''
+};
+
+const createCategory = async (formData: NewCategoryForm) => {
+  const now = new Date().toISOString();
+
+  return axiosInstance.post('/categories', {
+    ...formData,
+    createdAt: now,
+    updatedAt: now
+  });
 };
 
 export const NewCategoryForm = (props: NewCategoryFormProps) => {
@@ -38,23 +51,35 @@ export const NewCategoryForm = (props: NewCategoryFormProps) => {
     []
   );
 
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: createCategory,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.CATEGORIES] });
+      onClose();
+    },
+    onError: () => {
+      toast.error('Failed to create todo');
+    }
+  });
+
   return (
     <Stack
       component="form"
       sx={{ padding: 2, borderRadius: 3 }}
       spacing={2}
-      onSubmit={handleSubmit((data) => console.log(data))}
+      onSubmit={handleSubmit((data) => mutation.mutate(data))}
     >
       <Typography variant="h6">New Category</Typography>
 
       <TextField
         label="Name*"
-        variant="outlined"
         {...register('name', { required: 'Name is required' })}
         error={Boolean(errors.name)}
         helperText={errors?.name?.message}
         fullWidth
       />
+
       <Stack direction="row" justifyContent="space-between" spacing={1}>
         <Controller
           name="icon"
@@ -100,7 +125,6 @@ export const NewCategoryForm = (props: NewCategoryFormProps) => {
         <TextField
           label="Color*"
           type="color"
-          variant="outlined"
           {...register('color', { required: 'Color is required' })}
           sx={{ flexGrow: 1 }}
         />

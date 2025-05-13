@@ -1,5 +1,5 @@
 import { Add, Category, PlaylistAdd } from '@mui/icons-material';
-import { Box, IconButton, Stack } from '@mui/material';
+import { IconButton, Stack } from '@mui/material';
 import { JSX, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import NewToDoPopup from '../../features/new-todo';
@@ -10,10 +10,9 @@ type NavItem = {
   icon: JSX.Element;
 };
 
-export const BottomBar = () => {
+const BottomBar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-
   const [open, setOpen] = useState(false);
 
   const navItems: NavItem[] = [
@@ -24,7 +23,19 @@ export const BottomBar = () => {
   const isActive = (item: NavItem) => pathname === item.to;
 
   return (
-    <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ padding: 2, flexShrink: 0 }}>
+    <Stack
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
+      sx={(theme) => ({
+        padding: 2,
+        flexShrink: 0,
+        '& svg': {
+          fontSize: theme.spacing(4)
+        }
+      })}
+    >
+      {/* Floating Add Button */}
       <IconButton
         sx={{
           bgcolor: 'primary.main',
@@ -37,11 +48,14 @@ export const BottomBar = () => {
       >
         <Add />
       </IconButton>
+
+      {/* Navigation Buttons */}
       {navItems.map((item) => (
-        <Box
+        <IconButton
           key={item.key}
           onClick={() => navigate(item.to)}
           sx={{
+            padding: 2,
             cursor: 'pointer',
             color: isActive(item) ? 'primary.main' : 'text.secondary',
             '&:hover': {
@@ -50,9 +64,10 @@ export const BottomBar = () => {
           }}
         >
           {item.icon}
-        </Box>
+        </IconButton>
       ))}
 
+      {/* New To-Do Popup */}
       <NewToDoPopup open={open} onClose={() => setOpen(false)} />
     </Stack>
   );

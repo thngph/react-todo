@@ -2,6 +2,7 @@ import { Button, Stack, TextField, Typography } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { QUERY_KEY } from '../../../constants/key';
 import { axiosInstance } from '../../../libs/query-client';
 import { ToDo } from '../../../types/ToDo';
 
@@ -30,7 +31,7 @@ export const NewToDoForm = (props: NewToDoFormProps) => {
   const mutation = useMutation({
     mutationFn: createToDo,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.TODOS] });
       onClose();
     },
     onError: () => {
