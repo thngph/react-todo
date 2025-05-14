@@ -91,8 +91,8 @@ export const NewCategoryForm = (props: NewCategoryFormProps) => {
                 field.onChange(newValue);
               }}
               sx={{ flexGrow: 1 }}
-              renderOption={(props, option) => (
-                <Box component="li" sx={{ '& > img': { flexShrink: 0 } }} {...props}>
+              renderOption={({ key, ...props }, option) => (
+                <Box key={key} component="li" sx={{ '& > img': { flexShrink: 0 } }} {...props}>
                   <img loading="lazy" width="20" src={option} alt="" />
                 </Box>
               )}
