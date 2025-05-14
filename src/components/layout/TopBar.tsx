@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
-import logo from '../../../public/logo.svg';
+import logo from '/logo.svg';
 export const TopBar = () => {
   const navigate = useNavigate();
 
