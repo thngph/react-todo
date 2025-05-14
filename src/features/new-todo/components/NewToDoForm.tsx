@@ -61,6 +61,7 @@ export const NewToDoForm = (props: NewToDoFormProps) => {
         error={Boolean(errors.title)}
         helperText={errors?.title?.message}
         fullWidth
+        autoFocus
       />
 
       <Stack spacing={1} direction="row" justifyContent="end">

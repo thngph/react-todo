@@ -75,6 +75,7 @@ export const NewCategoryForm = (props: NewCategoryFormProps) => {
         error={Boolean(errors.name)}
         helperText={errors?.name?.message}
         fullWidth
+        autoFocus
       />
 
       {/* Icon and Color Fields */}
