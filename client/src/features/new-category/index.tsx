@@ -1,19 +1,20 @@
 import { Dialog } from '@mui/material';
-import { NewCategoryForm } from './components/NewCategoryForm';
+import CategoryForm, { CategoryData } from './components/CategoryForm';
 
-type NewCategoryPopupProps = {
+type CategoryPopupProps = {
   open: boolean;
   onClose: () => void;
+  defaultValues?: CategoryData;
 };
 
-export const NewCategoryPopup = (props: NewCategoryPopupProps) => {
-  const { open, onClose } = props;
+export const CategoryPopup = (props: CategoryPopupProps) => {
+  const { open, onClose, defaultValues } = props;
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <NewCategoryForm onClose={onClose} />
+      <CategoryForm onClose={onClose} defaultValues={defaultValues} />
     </Dialog>
   );
 };
 
-export default NewCategoryPopup;
+export default CategoryPopup;

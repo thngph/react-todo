@@ -5,13 +5,13 @@ import { PATH } from '../../../constants/path';
 import { fetcher } from '../../../libs/query-client';
 import { Category } from '../../../types/Category';
 
-type ToDoCategoryProps = { id: Category['id'] };
+type TodoCategoryProps = { id: Category['id'] };
 
-export const ToDoCategory = (props: ToDoCategoryProps) => {
+export const TodoCategory = (props: TodoCategoryProps) => {
   const { id } = props;
 
   const { data: category } = useQuery({
-    queryKey: [QUERY_KEY.CATEGORIES],
+    queryKey: [QUERY_KEY.CATEGORIES, id],
     queryFn: fetcher<Category>(`${PATH.CATEGORY}/${id}`)
   });
 
@@ -24,4 +24,4 @@ export const ToDoCategory = (props: ToDoCategoryProps) => {
   );
 };
 
-export default ToDoCategory;
+export default TodoCategory;

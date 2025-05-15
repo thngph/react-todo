@@ -10,8 +10,28 @@ type FilterBarProps = {
 
 const _ALL = 'ALL';
 
+const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
+  alignSelf: 'flex-start',
+  padding: theme.spacing(0, 2),
+
+  [`& .${toggleButtonGroupClasses.grouped}`]: {
+    border: 0,
+    borderRadius: 3,
+    minWidth: '65px',
+    [`&.${toggleButtonGroupClasses.disabled}`]: {
+      border: 0
+    }
+  },
+
+  [`& .${toggleButtonGroupClasses.middleButton},& .${toggleButtonGroupClasses.lastButton}`]: {
+    marginLeft: -1,
+    borderLeft: '1px solid transparent'
+  }
+}));
+
 export const FilterBar = (props: FilterBarProps) => {
   const { _options: options = defaultOptions } = props;
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [filteredBy, setFilteredBy] = React.useState(_ALL);
 
@@ -23,25 +43,6 @@ export const FilterBar = (props: FilterBarProps) => {
 
     setSearchParams(searchParams);
   };
-
-  const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
-    alignSelf: 'flex-start',
-    padding: theme.spacing(0, 2),
-
-    [`& .${toggleButtonGroupClasses.grouped}`]: {
-      border: 0,
-      borderRadius: 3,
-      minWidth: '65px',
-      [`&.${toggleButtonGroupClasses.disabled}`]: {
-        border: 0
-      }
-    },
-
-    [`& .${toggleButtonGroupClasses.middleButton},& .${toggleButtonGroupClasses.lastButton}`]: {
-      marginLeft: -1,
-      borderLeft: '1px solid transparent'
-    }
-  }));
 
   return (
     <StyledToggleButtonGroup

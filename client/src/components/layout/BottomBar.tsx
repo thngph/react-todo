@@ -2,7 +2,7 @@ import { Add, Category, PlaylistAdd } from '@mui/icons-material';
 import { IconButton, Stack } from '@mui/material';
 import { JSX, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import NewToDoPopup from '../../features/new-todo';
+import TodoPopup from '../../features/new-todo';
 
 type NavItem = {
   key: string;
@@ -39,10 +39,12 @@ const BottomBar = () => {
       <IconButton
         sx={{
           bgcolor: 'primary.main',
+          color: 'primary.contrastText',
           position: 'absolute',
           left: '50%',
           padding: 2,
-          transform: 'translate(-50%)'
+          transform: 'translate(-50%)',
+          '&:hover': { bgcolor: 'primary.main', opacity: 0.8, transition: 'opacity .15s' }
         }}
         onClick={() => setOpen(true)}
       >
@@ -68,7 +70,7 @@ const BottomBar = () => {
       ))}
 
       {/* New To-Do Popup */}
-      <NewToDoPopup open={open} onClose={() => setOpen(false)} />
+      <TodoPopup open={open} onClose={() => setOpen(false)} defaultValues={{ title: '' }} />
     </Stack>
   );
 };

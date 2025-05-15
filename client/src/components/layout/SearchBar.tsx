@@ -3,6 +3,7 @@ import { TextField } from '@mui/material';
 import React from 'react';
 import { useSearchParams } from 'react-router';
 import useDebounce from '../../hooks/useDebounce';
+import { DEFAULT } from '../../constants/default';
 
 export const SearchBar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -15,7 +16,7 @@ export const SearchBar = () => {
       else searchParams.delete('keyword');
 
       setSearchParams(searchParams);
-    }, 350),
+    }, DEFAULT.INPUT_DEBOUNCE),
     []
   );
 

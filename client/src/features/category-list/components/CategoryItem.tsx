@@ -1,13 +1,13 @@
 import { Box, Stack, Typography } from '@mui/material';
 import { Category } from '../../../types/Category';
 
-type CategoryItemProps = { category: Category };
+type CategoryItemProps = { category: Category; onClick: () => void };
 
 export const CategoryItem = (props: CategoryItemProps) => {
-  const { category } = props;
+  const { category, onClick } = props;
 
   return (
-    <Stack sx={{ overflow: 'hidden', flexGrow: 1 }} title={category.name}>
+    <Stack sx={{ overflow: 'hidden', flexGrow: 1 }} title={category.name} onClick={onClick}>
       <Stack
         sx={(theme) => ({
           alignItems: 'center',
