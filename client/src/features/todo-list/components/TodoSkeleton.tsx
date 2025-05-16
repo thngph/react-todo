@@ -1,7 +1,7 @@
 import { Box, Stack } from '@mui/material';
 import { DEFAULT } from '../../../constants/default';
 
-export const TodoLoading = () => {
+export const TodoSkeleton = () => {
   return (
     <Stack spacing={1} width={1}>
       {Array(DEFAULT.PAGE_LIMIT)
@@ -21,4 +21,4 @@ export const TodoLoading = () => {
   );
 };
 
-export default TodoLoading;
+export default TodoSkeleton;

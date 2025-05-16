@@ -145,7 +145,7 @@ export const CategoryForm = (props: NewCategoryFormProps) => {
         </Button>
 
         <Button variant="contained" type="submit">
-          Create
+          {defaultValues?.id ? 'Update' : 'Create'}
         </Button>
       </DialogActions>
     </Box>

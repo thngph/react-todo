@@ -67,13 +67,15 @@ export const TodoForm = (props: TodoFormProps) => {
                 options={categories}
                 loading={isLoading}
                 value={categories.find((c) => c.id === field.value) || null}
-                onChange={(_, newValue) => field.onChange(newValue?.id)}
+                onChange={(_, newValue) => field.onChange(newValue?.id || null)}
                 getOptionKey={(option) => option.id}
                 getOptionLabel={(option) => option.name}
                 renderOption={({ key, ...props }, option) => (
                   <Box key={key} component="li" sx={{ '& > img': { flexShrink: 0 } }} {...props}>
                     <img loading="lazy" width="20" src={option.icon} alt="" />
-                    <Typography noWrap>{option.name}</Typography>
+                    <Typography noWrap sx={{ marginLeft: 1 }}>
+                      {option.name}
+                    </Typography>
                   </Box>
                 )}
                 renderInput={(params) => (

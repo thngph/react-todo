@@ -12,7 +12,7 @@ import { Paginated } from '../../../types/Paginated';
 import { Todo } from '../../../types/Todo';
 import { TodoData } from '../../new-todo';
 import TodoItem from './TodoItem';
-import TodoLoading from './TodoLoading';
+import TodoSkeleton from './TodoSkeleton';
 
 type TodoListProps = {
   onDelete: (todo: Todo) => void;
@@ -66,7 +66,7 @@ export const TodoList = (props: TodoListProps) => {
     }
   }, [totalPage, page]);
 
-  if (isFetching) return <TodoLoading />;
+  if (isFetching) return <TodoSkeleton />;
   if (!todos?.length) return <Empty />;
 
   return (

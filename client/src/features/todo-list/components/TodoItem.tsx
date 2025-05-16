@@ -31,59 +31,56 @@ export const TodoItem = (props: TodoProps) => {
   };
 
   return (
-    <>
+    <Stack
+      direction="row"
+      alignItems="center"
+      justifyContent="space-between"
+      spacing={1}
+      sx={(theme) => ({
+        bgcolor: 'grey.300',
+        padding: theme.spacing(1, 2),
+        borderRadius: 3,
+
+        cursor: 'pointer',
+        '&:hover': { bgcolor: 'grey.400', transition: 'background-color .15s' }
+      })}
+      onClick={handleOpenEdit}
+    >
+      <Stack flexGrow={1} overflow="hidden">
+        <Typography noWrap>{todo.title}</Typography>
+        <Typography variant="body2" color="textDisabled">
+          {dateFormater(todo.createdAt)}
+        </Typography>
+      </Stack>
+
+      {todo.categoryId && <TodoCategory id={todo.categoryId} />}
+
+      <Checkbox
+        color="primary"
+        checked={todo.isCompleted}
+        size="medium"
+        icon={<RadioButtonUnchecked />}
+        checkedIcon={<CheckCircle />}
+        sx={{ flexShrink: 0 }}
+        onClick={(e) => handleComplete(e)}
+      />
+
       <Stack
         direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        spacing={1}
-        sx={(theme) => ({
-          bgcolor: 'grey.300',
-
-          padding: theme.spacing(1, 2),
-          borderRadius: 3,
-
-          cursor: 'pointer',
-          '&:hover': { bgcolor: 'grey.400', transition: 'background-color .15s' }
-        })}
-        onClick={handleOpenEdit}
+        sx={{
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          flexShrink: 0,
+          '&:hover': { color: 'error.main', cursor: 'pointer' }
+        }}
+        onClick={(ev) => {
+          ev.stopPropagation();
+          onDelete();
+        }}
       >
-        <Stack flexGrow={1} overflow="hidden">
-          <Typography noWrap>{todo.title}</Typography>
-          <Typography variant="body2" color="textDisabled">
-            {dateFormater(todo.createdAt)}
-          </Typography>
-        </Stack>
-
-        {todo.categoryId && <TodoCategory id={todo.categoryId} />}
-
-        <Checkbox
-          color="primary"
-          checked={todo.isCompleted}
-          size="medium"
-          icon={<RadioButtonUnchecked />}
-          checkedIcon={<CheckCircle />}
-          sx={{ flexShrink: 0 }}
-          onClick={(e) => handleComplete(e)}
-        />
-
-        <Stack
-          direction="row"
-          sx={{
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            flexShrink: 0,
-            '&:hover': { color: 'error.main', cursor: 'pointer' }
-          }}
-          onClick={(ev) => {
-            ev.stopPropagation();
-            onDelete();
-          }}
-        >
-          <Delete />
-        </Stack>
+        <Delete />
       </Stack>
-    </>
+    </Stack>
   );
 };
 
