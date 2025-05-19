@@ -1,8 +1,7 @@
-import { Add, Category, PlaylistAdd } from '@mui/icons-material';
+import { Category, PlaylistAdd } from '@mui/icons-material';
 import { IconButton, Stack } from '@mui/material';
-import { JSX, useState } from 'react';
+import { JSX } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import TodoPopup from '../../features/new-todo';
 
 type NavItem = {
   key: string;
@@ -13,7 +12,6 @@ type NavItem = {
 const BottomBar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
 
   const navItems: NavItem[] = [
     { key: 'todo', to: '/todo', icon: <PlaylistAdd /> },
@@ -35,22 +33,6 @@ const BottomBar = () => {
         }
       })}
     >
-      {/* Floating Add Button */}
-      <IconButton
-        sx={{
-          bgcolor: 'primary.main',
-          color: 'primary.contrastText',
-          position: 'absolute',
-          left: '50%',
-          padding: 2,
-          transform: 'translate(-50%)',
-          '&:hover': { bgcolor: 'primary.main', opacity: 0.8, transition: 'opacity .15s' }
-        }}
-        onClick={() => setOpen(true)}
-      >
-        <Add />
-      </IconButton>
-
       {/* Navigation Buttons */}
       {navItems.map((item) => (
         <IconButton
@@ -68,9 +50,6 @@ const BottomBar = () => {
           {item.icon}
         </IconButton>
       ))}
-
-      {/* New To-Do Popup */}
-      <TodoPopup open={open} onClose={() => setOpen(false)} defaultValues={{ title: '' }} />
     </Stack>
   );
 };

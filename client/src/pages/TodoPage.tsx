@@ -1,19 +1,22 @@
-import { Button, DialogActions, DialogContent, Stack, Typography } from '@mui/material';
+import { Add } from '@mui/icons-material';
+import { Button, DialogActions, DialogContent, IconButton, Stack, Typography } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { FilterBar } from '../components/layout/FilterBar';
+import FilterBar from '../components/layout/FilterBar';
 import Search from '../components/layout/SearchBar';
 import { Dialog } from '../components/ui/Dialog';
 import { QUERY_KEY } from '../constants/key';
 import { PATH } from '../constants/path';
 import TodoPopup, { TodoData } from '../features/new-todo';
-import TodoList from '../features/todo-list/components/TodoList';
+import TodoList from '../features/todo-list';
 import { axiosInstance } from '../libs/query-client';
 import { Todo } from '../types/Todo';
 
 const deleteTodo = async ({ id }: Pick<Todo, 'id'>) => axiosInstance.delete(`${PATH.TODO}/${id}`);
-
+const defaultValues: TodoData = {
+  title: ''
+};
 export const TodoPage = () => {
   const [deletingTodo, setDeletingTodo] = useState<Todo | null>(null);
   const [editingTodo, setEditingTodo] = useState<TodoData | null>(null);
@@ -62,10 +65,22 @@ export const TodoPage = () => {
       <Stack spacing={3} padding={2} alignItems="center" justifyContent="space-between">
         <Stack width={1} spacing={1}>
           <Search />
-          <FilterBar />
+          <Stack width={1} px={1} justifyContent="space-between" direction="row">
+            <FilterBar />
+            {/* Floating Add Button */}
+            <IconButton
+              sx={{
+                padding: 1,
+                color: (theme) => theme.palette.primary.main
+              }}
+              onClick={() => setEditingTodo(defaultValues)}
+            >
+              <Add />
+            </IconButton>
+          </Stack>
         </Stack>
 
-        <TodoList handleOpenEdit={setEditingTodo} onDelete={setDeletingTodo} />
+        <TodoList handleOpenForm={setEditingTodo} onDelete={setDeletingTodo} />
       </Stack>
     </>
   );

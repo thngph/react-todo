@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { v4 as uuid4 } from 'uuid';
 import { Dialog } from '../../components/ui/Dialog';
 import { QUERY_KEY } from '../../constants/key';
+import { PATH } from '../../constants/path';
 import { axiosInstance } from '../../libs/query-client';
 import { Todo } from '../../types/Todo';
 import { TodoForm } from './components/TodoForm';
@@ -11,7 +12,7 @@ export type TodoData = Pick<Todo, 'title' | 'categoryId'> & Partial<Pick<Todo, '
 
 const createTodo = async (formData: TodoData) => {
   const now = new Date().toISOString();
-  return axiosInstance.post('/todos', {
+  return axiosInstance.post(PATH.TODO, {
     ...formData,
     id: uuid4(),
     createdAt: now,
@@ -22,7 +23,7 @@ const createTodo = async (formData: TodoData) => {
 
 const updateTodo = async (formData: TodoData) => {
   const now = new Date().toISOString();
-  return axiosInstance.put(`/todos/${formData.id}`, { ...formData, updatedAt: now });
+  return axiosInstance.put(`${PATH.TODO}/${formData.id}`, { ...formData, updatedAt: now });
 };
 
 type TodoPopupProps = {

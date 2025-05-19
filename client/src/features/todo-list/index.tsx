@@ -3,24 +3,24 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useSearchParams } from 'react-router';
 import { match } from 'ts-pattern';
-import { Empty } from '../../../components/Empty';
-import { DEFAULT } from '../../../constants/default';
-import { QUERY_KEY, SEARCH_PARAM_KEY } from '../../../constants/key';
-import { PATH } from '../../../constants/path';
-import { fetcher } from '../../../libs/query-client';
-import { Paginated } from '../../../types/Paginated';
-import { Todo } from '../../../types/Todo';
-import { TodoData } from '../../new-todo';
-import TodoItem from './TodoItem';
-import TodoSkeleton from './TodoSkeleton';
+import { Empty } from '../../components/Empty';
+import { DEFAULT } from '../../constants/default';
+import { QUERY_KEY, SEARCH_PARAM_KEY } from '../../constants/key';
+import { PATH } from '../../constants/path';
+import { fetcher } from '../../libs/query-client';
+import { Paginated } from '../../types/Paginated';
+import { Todo } from '../../types/Todo';
+import { TodoData } from '../new-todo';
+import TodoItem from './components/TodoItem';
+import TodoSkeleton from './components/TodoSkeleton';
 
 type TodoListProps = {
   onDelete: (todo: Todo) => void;
-  handleOpenEdit: (todo: TodoData) => void;
+  handleOpenForm: (todo: TodoData) => void;
 };
 
 export const TodoList = (props: TodoListProps) => {
-  const { onDelete, handleOpenEdit } = props;
+  const { onDelete, handleOpenForm } = props;
   const [searchParams, setSearchParams] = useSearchParams();
 
   const keyword = searchParams.get(SEARCH_PARAM_KEY.KEYWORD) || '';
@@ -77,7 +77,7 @@ export const TodoList = (props: TodoListProps) => {
             key={todo.id}
             todo={todo}
             onDelete={() => onDelete(todo)}
-            handleOpenEdit={() => handleOpenEdit(todo)}
+            handleOpenEdit={() => handleOpenForm(todo)}
           />
         ))}
       </Stack>

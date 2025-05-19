@@ -10,9 +10,8 @@ type FilterBarProps = {
 
 const _ALL = 'ALL';
 
-const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
+const StyledToggleButtonGroup = styled(ToggleButtonGroup)({
   alignSelf: 'flex-start',
-  padding: theme.spacing(0, 2),
 
   [`& .${toggleButtonGroupClasses.grouped}`]: {
     border: 0,
@@ -27,7 +26,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
     marginLeft: -1,
     borderLeft: '1px solid transparent'
   }
-}));
+});
 
 export const FilterBar = (props: FilterBarProps) => {
   const { _options: options = defaultOptions } = props;
