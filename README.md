@@ -17,7 +17,7 @@ This copies example configuration files to create your local environment.
 3. Start the backend server:
 
 ```
-cd apis && yarn install
+cd api && yarn install
 yarn start
 ```
 
