@@ -1,14 +1,16 @@
-import { Button, Dialog, DialogActions, DialogContent, Stack, Typography } from '@mui/material';
+import { Button, DialogActions, DialogContent, Stack, Typography } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import { FilterBar } from '../../components/layout/FilterBar';
-import Search from '../../components/layout/SearchBar';
-import { QUERY_KEY } from '../../constants/key';
-import { PATH } from '../../constants/path';
-import { axiosInstance } from '../../libs/query-client';
-import { Todo } from '../../types/Todo';
-import TodoPopup, { TodoData } from '../new-todo';
-import TodoList from './components/TodoList';
+import { toast } from 'react-toastify';
+import { FilterBar } from '../components/layout/FilterBar';
+import Search from '../components/layout/SearchBar';
+import { Dialog } from '../components/ui/Dialog';
+import { QUERY_KEY } from '../constants/key';
+import { PATH } from '../constants/path';
+import TodoPopup, { TodoData } from '../features/new-todo';
+import TodoList from '../features/todo-list/components/TodoList';
+import { axiosInstance } from '../libs/query-client';
+import { Todo } from '../types/Todo';
 
 const deleteTodo = async ({ id }: Pick<Todo, 'id'>) => axiosInstance.delete(`${PATH.TODO}/${id}`);
 
@@ -23,11 +25,13 @@ export const TodoPage = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.TODOS] });
       setDeletingTodo(null);
-    }
+    },
+    onError: () => toast.error('Delete todo failed')
   });
 
   const handleDelete = () => {
     if (mutation.isPending || !deletingTodo) return;
+
     mutation.mutate({ id: deletingTodo.id });
   };
 
@@ -36,7 +40,7 @@ export const TodoPage = () => {
       <TodoPopup
         open={Boolean(editingTodo)}
         onClose={() => setEditingTodo(null)}
-        defaultValues={editingTodo || { title: '', categoryId: '' }}
+        defaultValues={editingTodo || undefined}
       />
 
       <Dialog maxWidth="xs" fullWidth open={Boolean(deletingTodo)} onClose={() => setDeletingTodo(null)}>

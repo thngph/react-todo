@@ -21,14 +21,14 @@ const defaultParams = {
 export const useCategoriesQuery = (_params: UseGetCategoriesParams = {}) => {
   const [searchParams] = useSearchParams();
 
-  const params = {
+  const _searchParam = {
     name_like: searchParams.get('keyword') || undefined
   };
-  const queryParams = { ...defaultParams, ...params, ..._params };
+  const params = { ...defaultParams, ..._searchParam, ..._params };
 
   return useQuery({
-    queryKey: [QUERY_KEY.CATEGORIES, queryParams],
-    queryFn: fetcher<Paginated<Category>>(PATH.CATEGORY, { params: queryParams }),
+    queryKey: [QUERY_KEY.CATEGORIES, params],
+    queryFn: fetcher<Paginated<Category>>(PATH.CATEGORY, { params }),
     placeholderData: keepPreviousData
   });
 };

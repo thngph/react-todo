@@ -1,45 +1,23 @@
 import { Autocomplete, Box, Button, DialogActions, DialogContent, DialogTitle, Stack, TextField } from '@mui/material';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { v4 as uuidv4 } from 'uuid';
 import { DEFAULT } from '../../../constants/default';
-import { QUERY_KEY } from '../../../constants/key';
 import useDebounce from '../../../hooks/useDebounce';
-import { axiosInstance } from '../../../libs/query-client';
 import { Category } from '../../../types/Category';
 import useGetIcons from '../hooks/useGetIcons';
 
 type NewCategoryFormProps = {
   onClose: () => void;
+  onSubmit: (data: CategoryData) => void;
+  isPending?: boolean;
   defaultValues?: CategoryData;
+  title?: string;
 };
 
 export type CategoryData = Omit<Category, 'id'> & Partial<Pick<Category, 'id'>>;
 
-const createCategory = async (formData: CategoryData) => {
-  const now = new Date().toISOString();
-
-  return axiosInstance.post('/categories', {
-    ...formData,
-    id: uuidv4(),
-    createdAt: now,
-    updatedAt: now
-  });
-};
-
-const updateCategory = async (formData: CategoryData) => {
-  const now = new Date().toISOString();
-
-  return axiosInstance.put(`/categories/${formData.id}`, {
-    ...formData,
-    updatedAt: now
-  });
-};
-
 export const CategoryForm = (props: NewCategoryFormProps) => {
-  const { onClose, defaultValues } = props;
+  const { onClose, onSubmit, isPending, defaultValues, title } = props;
 
   const {
     register,
@@ -47,28 +25,6 @@ export const CategoryForm = (props: NewCategoryFormProps) => {
     handleSubmit,
     control
   } = useForm({ defaultValues, mode: 'all' });
-
-  const queryClient = useQueryClient();
-
-  const onSuccess = () => {
-    queryClient.invalidateQueries({ queryKey: [QUERY_KEY.CATEGORIES] });
-    onClose();
-  };
-
-  const createCategoryMutation = useMutation({
-    mutationFn: createCategory,
-    onSuccess: onSuccess,
-    onError: () => toast.error('Failed to create category')
-  });
-  const updateCategoryMutation = useMutation({
-    mutationFn: updateCategory,
-    onSuccess: onSuccess,
-    onError: () => toast.error('Failed to update category')
-  });
-
-  const mutation = defaultValues?.id ? updateCategoryMutation : createCategoryMutation;
-
-  const onSubmit = (data: CategoryData) => mutation.mutate(data);
 
   const [search, setSearch] = React.useState<string>('');
   const handleSearch = React.useCallback(
@@ -79,7 +35,7 @@ export const CategoryForm = (props: NewCategoryFormProps) => {
 
   return (
     <Box component="form" sx={{ borderRadius: 3 }} onSubmit={handleSubmit(onSubmit)}>
-      <DialogTitle>New Category</DialogTitle>
+      <DialogTitle>{title ?? 'New Category'}</DialogTitle>
 
       <DialogContent>
         <Stack spacing={2} pt={1}>
@@ -144,7 +100,7 @@ export const CategoryForm = (props: NewCategoryFormProps) => {
           Close
         </Button>
 
-        <Button variant="contained" type="submit">
+        <Button variant="contained" loading={isPending} type="submit">
           {defaultValues?.id ? 'Update' : 'Create'}
         </Button>
       </DialogActions>

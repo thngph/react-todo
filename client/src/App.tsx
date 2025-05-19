@@ -9,20 +9,6 @@ import router from './routes/router';
 const theme = createTheme({
   typography: {
     fontFamily: ['Poppins', 'sans-serif'].join(',')
-  },
-  components: {
-    MuiDialog: {
-      defaultProps: {
-        slotProps: {
-          paper: {
-            sx: {
-              width: 400,
-              maxWidth: '100%'
-            }
-          }
-        }
-      }
-    }
   }
 });
 

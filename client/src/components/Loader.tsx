@@ -20,3 +20,5 @@ export const Loader = (props: LoaderProps) => {
     </ErrorBoundary>
   );
 };
+
+export default Loader;

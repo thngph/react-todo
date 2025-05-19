@@ -2,8 +2,8 @@ import { Search } from '@mui/icons-material';
 import { TextField } from '@mui/material';
 import React from 'react';
 import { useSearchParams } from 'react-router';
-import useDebounce from '../../hooks/useDebounce';
 import { DEFAULT } from '../../constants/default';
+import useDebounce from '../../hooks/useDebounce';
 
 export const SearchBar = () => {
   const [searchParams, setSearchParams] = useSearchParams();

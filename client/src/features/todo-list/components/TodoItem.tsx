@@ -1,6 +1,7 @@
 import { CheckCircle, Delete, RadioButtonUnchecked } from '@mui/icons-material';
 import { Checkbox, Stack, Typography } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import React from 'react';
 import { QUERY_KEY } from '../../../constants/key';
 import { PATH } from '../../../constants/path';
 import { axiosInstance } from '../../../libs/query-client';
@@ -13,16 +14,14 @@ type TodoProps = { todo: Todo; onDelete: () => void; handleOpenEdit: () => void 
 const markDone = async ({ id, isCompleted }: Pick<Todo, 'id' | 'isCompleted'>) =>
   axiosInstance.patch(`${PATH.TODO}/${id}`, { isCompleted });
 
-export const TodoItem = (props: TodoProps) => {
+export const TodoItem = React.memo((props: TodoProps) => {
   const { todo, onDelete, handleOpenEdit } = props;
 
   const queryClient = useQueryClient();
 
   const markDoneMutation = useMutation({
     mutationFn: markDone,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.TODOS] });
-    }
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY.TODOS] })
   });
 
   const handleComplete = (e: React.MouseEvent) => {
@@ -82,6 +81,6 @@ export const TodoItem = (props: TodoProps) => {
       </Stack>
     </Stack>
   );
-};
+});
 
 export default TodoItem;

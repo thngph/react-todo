@@ -1,16 +1,12 @@
-import { useRef } from 'react';
+import React from 'react';
 
-type DebounceEvent = React.ChangeEvent<HTMLInputElement>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const useDebounce = <T extends (...args: any[]) => void>(cb: T, delay: number) => {
+  const timeoutId = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
-export const useDebounce = <T extends (args: DebounceEvent) => unknown>(cb: T, delay: number) => {
-  const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  return (args: DebounceEvent) => {
-    if (timeoutId.current) {
-      clearTimeout(timeoutId.current);
-    }
-
-    timeoutId.current = setTimeout(() => cb(args), delay);
+  return (...args: Parameters<T>) => {
+    if (timeoutId.current) clearTimeout(timeoutId.current);
+    timeoutId.current = setTimeout(() => cb(...args), delay);
   };
 };
 

@@ -1,10 +1,11 @@
 import { Clear } from '@mui/icons-material';
 import { Box, IconButton, Stack, Typography } from '@mui/material';
+import React from 'react';
 import { Category } from '../../../types/Category';
 
 type CategoryItemProps = { category: Category; onClick: () => void; onDelete: () => void };
 
-export const CategoryItem = (props: CategoryItemProps) => {
+export const CategoryItem = React.memo((props: CategoryItemProps) => {
   const { category, onClick, onDelete } = props;
 
   return (
@@ -49,5 +50,5 @@ export const CategoryItem = (props: CategoryItemProps) => {
       </Typography>
     </Stack>
   );
-};
+});
 export default CategoryItem;

@@ -1,9 +1,10 @@
 import { default as React } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router';
 import MainLayout from '../components/layout/MainLayout';
+import Loader from '../components/Loader';
 
-const TodoList = React.lazy(() => import('../features/todo-list'));
-const CategoryList = React.lazy(() => import('../features/category-list'));
+const TodoPage = React.lazy(() => import('../pages/TodoPage'));
+const CategoryPage = React.lazy(() => import('../pages/CategoryPage'));
 
 const router = createBrowserRouter([
   {
@@ -12,11 +13,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/todo',
-        element: <TodoList />
+        element: (
+          <Loader>
+            <TodoPage />
+          </Loader>
+        )
       },
       {
         path: '/category',
-        element: <CategoryList />
+        element: (
+          <Loader>
+            <CategoryPage />
+          </Loader>
+        )
       },
       { path: '*', element: <Navigate to={'/todo'} /> }
     ]

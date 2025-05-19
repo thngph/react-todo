@@ -1,7 +1,7 @@
-import { Dialog } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid4 } from 'uuid';
+import { Dialog } from '../../components/ui/Dialog';
 import { QUERY_KEY } from '../../constants/key';
 import { axiosInstance } from '../../libs/query-client';
 import { Todo } from '../../types/Todo';
@@ -13,7 +13,7 @@ const createTodo = async (formData: TodoData) => {
   const now = new Date().toISOString();
   return axiosInstance.post('/todos', {
     ...formData,
-    id: uuidv4(),
+    id: uuid4(),
     createdAt: now,
     updatedAt: now,
     isCompleted: false
@@ -28,7 +28,7 @@ const updateTodo = async (formData: TodoData) => {
 type TodoPopupProps = {
   open: boolean;
   onClose: () => void;
-  defaultValues: TodoData;
+  defaultValues?: TodoData;
 };
 
 export const TodoPopup = (props: TodoPopupProps) => {
@@ -40,25 +40,23 @@ export const TodoPopup = (props: TodoPopupProps) => {
     queryClient.invalidateQueries({ queryKey: [QUERY_KEY.TODOS] });
     onClose();
   };
-  const createTodoMutation = useMutation({
-    mutationFn: createTodo,
-    onSuccess: onSuccess,
-    onError: () => toast.error('Failed to create todo')
+
+  const onError = (msg: string) => toast.error(msg);
+
+  const mutation = useMutation({
+    mutationFn: defaultValues?.id ? updateTodo : createTodo,
+    onSuccess,
+    onError: () => onError(defaultValues?.id ? 'Update todo failed' : 'Create todo failed')
   });
 
-  const updateTodoMutation = useMutation({
-    mutationFn: updateTodo,
-    onSuccess: onSuccess,
-    onError: () => toast.error('Failed to update todo')
-  });
-
-  const mutation = defaultValues.id ? updateTodoMutation : createTodoMutation;
+  const title = defaultValues?.id ? 'Edit todo' : 'Create todo';
 
   return (
     <Dialog open={open} onClose={onClose}>
       <TodoForm
         onClose={onClose}
         onSubmit={(data) => mutation.mutate(data)}
+        title={title}
         isPending={mutation.isPending}
         defaultValues={defaultValues}
       />
