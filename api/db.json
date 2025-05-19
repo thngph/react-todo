@@ -44,7 +44,7 @@
       "title": "wash car",
       "createdAt": "2025-05-14T02:45:41.721Z",
       "updatedAt": "2025-05-16T07:50:07.101Z",
-      "isCompleted": true,
+      "isCompleted": false,
       "id": "9N-In71",
       "categoryId": "31293dcc-8e22-4de3-91b7-68db5e5f3d81"
     },
@@ -60,7 +60,7 @@
       "title": "nhf5444",
       "createdAt": "2025-05-15T07:20:21.544Z",
       "updatedAt": "2025-05-16T07:49:34.234Z",
-      "isCompleted": true,
+      "isCompleted": false,
       "id": "xMUzXLw",
       "categoryId": "10ce49e2-3922-4536-b9e6-c67fe01a908a"
     },
@@ -78,7 +78,7 @@
       "id": "629968c9-1ba2-436b-bf08-2ae3de229bb3",
       "createdAt": "2025-05-19T07:12:30.101Z",
       "updatedAt": "2025-05-19T07:12:30.101Z",
-      "isCompleted": false
+      "isCompleted": true
     }
   ],
   "categories": [

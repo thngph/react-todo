@@ -15,7 +15,7 @@ export const useGetIcons = (props?: GetIconProps) => {
     queryKey: [QUERY_KEY.CATEGORY_ICON],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     queryFn: fetcher<any>(`${CONFIG.ICONIFY_API_URI}/collection?prefix=${CONFIG.CATEGORY_ICON_PREFIX}`),
-    staleTime: -1
+    staleTime: Infinity
   });
 
   if (isLoading) return [];
