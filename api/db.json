@@ -1,111 +1,76 @@
 {
   "todos": [
     {
-      "title": "ballerina",
-      "createdAt": "2025-05-12T08:22:44.692Z",
-      "updatedAt": "2025-05-16T07:01:14.659Z",
-      "isCompleted": true,
-      "id": "YLb4jEY",
-      "categoryId": "d2708a33-a075-4e14-a764-e25dbfb344b0"
-    },
-    {
-      "title": "cappucina",
-      "createdAt": "2025-05-12T15:48:02.197Z",
-      "updatedAt": "2025-05-16T07:01:25.066Z",
-      "isCompleted": false,
-      "id": "GE-U_W7",
-      "categoryId": "9ed9cb84-5f37-43e8-90c7-199345758260"
-    },
-    {
-      "title": "asdasasd",
-      "createdAt": "2025-05-12T15:48:13.822Z",
-      "updatedAt": "2025-05-16T07:01:53.864Z",
-      "isCompleted": true,
-      "id": "yaY3TYx",
-      "categoryId": "d2708a33-a075-4e14-a764-e25dbfb344b0"
-    },
-    {
-      "title": "asdasdasdasd",
-      "createdAt": "2025-05-12T15:48:21.888Z",
-      "updatedAt": "2025-05-16T07:56:28.580Z",
-      "isCompleted": true,
-      "id": "P7Of52S",
-      "categoryId": "YgqMV61"
-    },
-    {
-      "title": "sdasdasfsa",
-      "createdAt": "2025-05-13T07:24:26.122Z",
-      "updatedAt": "2025-05-16T06:40:25.392Z",
-      "isCompleted": true,
-      "id": "pODLbsg",
-      "categoryId": "d2708a33-a075-4e14-a764-e25dbfb344b0"
+      "title": "feed car",
+      "categoryId": "a9ed1b73-f4db-4460-8b5f-e04481527be2",
+      "id": "f6a9a457-2522-45b3-b17d-4e264c056f5b",
+      "createdAt": "2025-05-20T05:47:28.845Z",
+      "updatedAt": "2025-05-20T05:47:28.845Z",
+      "isCompleted": false
     },
     {
       "title": "wash car",
-      "createdAt": "2025-05-14T02:45:41.721Z",
-      "updatedAt": "2025-05-16T07:50:07.101Z",
-      "isCompleted": false,
-      "id": "9N-In71",
-      "categoryId": "31293dcc-8e22-4de3-91b7-68db5e5f3d81"
-    },
-    {
-      "title": "ghdgh",
       "categoryId": "a9ed1b73-f4db-4460-8b5f-e04481527be2",
-      "createdAt": "2025-05-15T03:49:34.692Z",
-      "updatedAt": "2025-05-16T07:50:12.657Z",
+      "id": "d7d9dff7-d467-486d-a546-ad06fe383910",
+      "createdAt": "2025-05-20T05:47:46.289Z",
+      "updatedAt": "2025-05-20T05:47:46.289Z",
+      "isCompleted": true
+    },
+    {
+      "title": "run",
+      "id": "df47baa0-4dfc-458a-b6cc-3b5ca3cb2c20",
+      "createdAt": "2025-05-20T05:47:57.363Z",
+      "updatedAt": "2025-05-20T05:47:57.363Z",
+      "isCompleted": false
+    },
+    {
+      "title": "having ice scream",
+      "id": "961a1faf-d89b-4cda-b5b2-4781226b8dc8",
+      "createdAt": "2025-05-20T05:48:05.154Z",
+      "updatedAt": "2025-05-20T05:49:35.322Z",
       "isCompleted": true,
-      "id": "NphL_vh"
+      "categoryId": "b86fa823-02d8-44b5-a7a0-ba38751be70a"
     },
     {
-      "title": "nhf5444",
-      "createdAt": "2025-05-15T07:20:21.544Z",
-      "updatedAt": "2025-05-16T07:49:34.234Z",
+      "title": "buy groceries",
+      "id": "9a1f07db-b3e4-4135-9e3e-d062d5ca3bc1",
+      "createdAt": "2025-05-20T05:48:36.701Z",
+      "updatedAt": "2025-05-20T05:48:44.972Z",
       "isCompleted": false,
-      "id": "xMUzXLw",
-      "categoryId": "10ce49e2-3922-4536-b9e6-c67fe01a908a"
+      "categoryId": "d2708a33-a075-4e14-a764-e25dbfb344b0"
     },
     {
-      "title": "ribu",
-      "categoryId": "6fd900ce-4cce-4143-89ff-77833d8bd55a",
-      "id": "d3ba0f3c-4e39-402d-801c-43d7d58a6050",
-      "createdAt": "2025-05-16T07:01:44.170Z",
-      "updatedAt": "2025-05-16T07:01:44.170Z",
+      "title": "play with car",
+      "categoryId": "a9ed1b73-f4db-4460-8b5f-e04481527be2",
+      "id": "067b2157-1a2c-4056-aaeb-6bf3abca1425",
+      "createdAt": "2025-05-20T05:49:04.485Z",
+      "updatedAt": "2025-05-20T05:49:04.485Z",
       "isCompleted": true
     },
     {
-      "title": "asd",
-      "categoryId": "c4006708-5fe5-478d-888e-a81c6bea4b7b",
-      "id": "629968c9-1ba2-436b-bf08-2ae3de229bb3",
-      "createdAt": "2025-05-19T07:12:30.101Z",
-      "updatedAt": "2025-05-19T07:12:30.101Z",
-      "isCompleted": true
+      "title": "read ",
+      "categoryId": "b86fa823-02d8-44b5-a7a0-ba38751be70a",
+      "id": "96502f55-ab8b-4a0c-ab0e-bced41b4ce3f",
+      "createdAt": "2025-05-20T05:49:30.270Z",
+      "updatedAt": "2025-05-20T05:49:30.270Z",
+      "isCompleted": false
+    },
+    {
+      "title": "do nothing",
+      "id": "2309c699-8a69-45a0-8426-4e3770b6d8e3",
+      "createdAt": "2025-05-20T05:49:39.786Z",
+      "updatedAt": "2025-05-20T05:49:39.786Z",
+      "isCompleted": false
+    },
+    {
+      "title": "do something",
+      "id": "49ee519c-ec32-422f-9a23-961902af240a",
+      "createdAt": "2025-05-20T05:49:46.363Z",
+      "updatedAt": "2025-05-20T05:49:46.363Z",
+      "isCompleted": false
     }
   ],
   "categories": [
-    {
-      "color": "#ef12f3",
-      "icon": "https://api.iconify.design/fluent-emoji-flat/boy-dark.svg",
-      "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      "createdAt": "2025-05-15T04:00:26.396Z",
-      "updatedAt": "2025-05-16T07:49:23.345Z",
-      "id": "YgqMV61"
-    },
-    {
-      "color": "#6573c3",
-      "icon": "https://api.iconify.design/fluent-emoji-flat/1st-place-medal.svg",
-      "name": "test",
-      "id": "10ce49e2-3922-4536-b9e6-c67fe01a908a",
-      "createdAt": "2025-05-15T10:40:42.147Z",
-      "updatedAt": "2025-05-15T10:40:42.147Z"
-    },
-    {
-      "color": "#30c0af",
-      "icon": "https://api.iconify.design/fluent-emoji-flat/boxing-glove.svg",
-      "name": "test 2",
-      "id": "9ed9cb84-5f37-43e8-90c7-199345758260",
-      "createdAt": "2025-05-15T11:24:33.642Z",
-      "updatedAt": "2025-05-19T02:51:53.238Z"
-    },
     {
       "color": "#6573c3",
       "icon": "https://api.iconify.design/fluent-emoji-flat/crystal-ball.svg",
@@ -125,10 +90,10 @@
     {
       "color": "#db0f61",
       "icon": "https://api.iconify.design/fluent-emoji-flat/gem-stone.svg",
-      "name": "ruby",
+      "name": "ruby chan",
       "id": "6fd900ce-4cce-4143-89ff-77833d8bd55a",
       "createdAt": "2025-05-16T03:43:42.391Z",
-      "updatedAt": "2025-05-16T03:43:42.391Z"
+      "updatedAt": "2025-05-20T05:19:05.469Z"
     },
     {
       "color": "#02f252",
@@ -139,20 +104,12 @@
       "updatedAt": "2025-05-16T03:43:59.449Z"
     },
     {
-      "color": "#3c4a9a",
-      "icon": "https://api.iconify.design/fluent-emoji-flat/smiling-cat-with-heart-eyes.svg",
-      "name": "kitten",
-      "id": "31293dcc-8e22-4de3-91b7-68db5e5f3d81",
-      "createdAt": "2025-05-16T03:44:28.694Z",
-      "updatedAt": "2025-05-16T03:44:28.694Z"
-    },
-    {
-      "color": "#3248c3",
+      "color": "#4c5bae",
       "icon": "https://api.iconify.design/fluent-emoji-flat/face-screaming-in-fear.svg",
       "name": "aaaaaaaaa",
       "id": "d2708a33-a075-4e14-a764-e25dbfb344b0",
       "createdAt": "2025-05-16T03:49:38.085Z",
-      "updatedAt": "2025-05-16T03:49:38.085Z"
+      "updatedAt": "2025-05-20T05:18:54.624Z"
     },
     {
       "color": "#3ca5c8",
@@ -163,14 +120,6 @@
       "updatedAt": "2025-05-16T04:18:57.321Z"
     },
     {
-      "color": "#ddeca7",
-      "icon": "https://api.iconify.design/fluent-emoji-flat/carp-streamer.svg",
-      "name": "sdgsdg",
-      "id": "f3180517-2db7-42be-a80a-1694a68373f8",
-      "createdAt": "2025-05-16T07:03:09.930Z",
-      "updatedAt": "2025-05-16T07:03:28.675Z"
-    },
-    {
       "color": "#c365bb",
       "icon": "https://api.iconify.design/fluent-emoji-flat/pouting-cat.svg",
       "name": "mimimimi",
@@ -179,20 +128,12 @@
       "updatedAt": "2025-05-19T02:50:55.061Z"
     },
     {
-      "color": "#6573c3",
-      "icon": "https://api.iconify.design/fluent-emoji-flat/3rd-place-medal.svg",
-      "name": "t",
-      "id": "b45664ba-3528-47db-a04c-39e4843dd721",
-      "createdAt": "2025-05-19T07:23:03.773Z",
-      "updatedAt": "2025-05-19T07:23:03.773Z"
-    },
-    {
-      "color": "#e316b7",
-      "icon": "https://api.iconify.design/fluent-emoji-flat/snake.svg",
-      "name": "anaconda",
-      "id": "14ce01f6-9a2a-48a3-a018-5e51f5a12b81",
-      "createdAt": "2025-05-19T07:39:54.430Z",
-      "updatedAt": "2025-05-19T07:39:54.430Z"
+      "color": "#c3659c",
+      "icon": "https://api.iconify.design/fluent-emoji-flat/musical-score.svg",
+      "name": "entertainment",
+      "id": "3974e73e-8779-43b5-afcd-c777e67d8879",
+      "createdAt": "2025-05-20T05:51:40.389Z",
+      "updatedAt": "2025-05-20T05:51:40.389Z"
     }
   ]
 }

@@ -5,21 +5,24 @@ import TopBar from './TopBar';
 
 export const MainLayout = () => {
   return (
-    <Stack
-      sx={(theme) => ({
-        backgroundColor: theme.palette.background.default,
-        maxWidth: theme.breakpoints.values.sm,
-        mx: 'auto',
-        position: 'relative',
-        height: '100vh',
-        overflow: 'hidden'
-      })}
-    >
-      <TopBar />
-      <Box overflow="auto" mt="auto" flexGrow={1}>
-        <Outlet />
-      </Box>
-      <BottomBar />
+    <Stack height="100vh" justifyContent={'center'} alignItems="center">
+      <Stack
+        sx={{
+          backgroundColor: 'background.default',
+          maxWidth: '430px',
+          borderRadius: 3,
+          width: '100%',
+          height: '100%',
+          maxHeight: '932px',
+          overflow: 'hidden'
+        }}
+      >
+        <TopBar />
+        <Box overflow="auto" mt="auto" flexGrow={1}>
+          <Outlet />
+        </Box>
+        <BottomBar />
+      </Stack>
     </Stack>
   );
 };

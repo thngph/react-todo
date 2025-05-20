@@ -7,6 +7,7 @@ export const Empty = () => {
       component="img"
       src={emptyImage}
       sx={{
+        padding: 2,
         alignSelf: 'center',
         maxWidth: '300px',
         margin: '0 auto',

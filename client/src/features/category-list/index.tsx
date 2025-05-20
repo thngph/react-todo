@@ -25,7 +25,7 @@ export const CategoryList = (props: CategoryListProps) => {
     <Grid container spacing={2} padding={2} justifyContent="flex-start" sx={{ color: 'grey.500' }}>
       {categories?.length &&
         categories.map((category) => (
-          <Grid key={category.id} size={2}>
+          <Grid key={category.id} size={3}>
             <CategoryItem
               category={category}
               onClick={() => onEdit(category)}
@@ -36,7 +36,7 @@ export const CategoryList = (props: CategoryListProps) => {
           </Grid>
         ))}
 
-      <Grid size={2} sx={{ cursor: 'pointer' }} onClick={() => onEdit(defaultValues)}>
+      <Grid size={3} sx={{ cursor: 'pointer' }} onClick={() => onEdit(defaultValues)}>
         <Stack alignItems="center">
           <Stack
             sx={(theme) => ({

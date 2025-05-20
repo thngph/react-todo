@@ -23,11 +23,12 @@ const BottomBar = () => {
   return (
     <Stack
       direction="row"
-      justifyContent="space-between"
+      justifyContent="space-evenly"
       alignItems="center"
       sx={(theme) => ({
         padding: 2,
         flexShrink: 0,
+        boxShadow: 1,
         '& svg': {
           fontSize: theme.spacing(4)
         }
