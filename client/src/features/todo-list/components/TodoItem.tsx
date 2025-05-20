@@ -36,7 +36,7 @@ export const TodoItem = React.memo((props: TodoProps) => {
       justifyContent="space-between"
       spacing={1}
       sx={(theme) => ({
-        bgcolor: 'grey.300',
+        bgcolor: 'background.paper',
         padding: theme.spacing(1, 2),
         borderRadius: 3,
 

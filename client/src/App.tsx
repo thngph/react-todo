@@ -9,6 +9,24 @@ import router from './routes/router';
 const theme = createTheme({
   typography: {
     fontFamily: ['Poppins', 'sans-serif'].join(',')
+  },
+  colorSchemes: {
+    dark: {
+      palette: {
+        background: {
+          default: '#121212',
+          paper: '#1E1E1E'
+        }
+      }
+    },
+    light: {
+      palette: {
+        background: {
+          default: '#FFFFFF',
+          paper: '#F5F5F5'
+        }
+      }
+    }
   }
 });
 
